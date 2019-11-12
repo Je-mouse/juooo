@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <h2>app</h2>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 <script>
 export default {
-  
+  name:"App"
 }
 </script>
-<style lang="scss">
+<style>
 
 </style>
