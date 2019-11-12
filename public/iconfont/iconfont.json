@@ -1,0 +1,79 @@
+{
+  "id": "1492309",
+  "name": "icon",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "651239",
+      "name": "向右",
+      "font_class": "xiangyou",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "885141",
+      "name": "主页",
+      "font_class": "zhuye",
+      "unicode": "e687",
+      "unicode_decimal": 59015
+    },
+    {
+      "icon_id": "908501",
+      "name": "分享",
+      "font_class": "fenxiang",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "1053995",
+      "name": "icon-menu-left",
+      "font_class": "iconfanhui",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "1053997",
+      "name": "icon-option-horizontal",
+      "font_class": "icongengduo",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "1092166",
+      "name": "筛选",
+      "font_class": "shaixuan",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "7335460",
+      "name": "向下",
+      "font_class": "xiangxia",
+      "unicode": "eb1f",
+      "unicode_decimal": 60191
+    },
+    {
+      "icon_id": "11536338",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e797",
+      "unicode_decimal": 59287
+    },
+    {
+      "icon_id": "11556692",
+      "name": "切换列",
+      "font_class": "qiehuanlie",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "11613936",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

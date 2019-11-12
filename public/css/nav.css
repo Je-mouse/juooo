@@ -1,0 +1,49 @@
+ /* 导航 */
+ nav{
+    display: flex;
+    padding: .1rem .1rem;
+    background: #fefefe;
+    left: 0;
+    top: 1rem;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+    color: #666;
+    font-size: .14rem;
+    overflow: hidden;
+    height: .36rem;
+}
+nav ul{
+    flex: 1;
+    width: 4rem;
+    margin-right: .13333rem;
+    overflow: auto;
+    display: flex;
+    flex-wrap:nowrap ;
+    line-height: .16rem;
+    height: .38rem;
+}
+nav ul li{
+    list-style: none;
+    white-space: nowrap;
+    margin: 0 .06rem;
+    padding: 0 .03rem;
+    height: .2rem;
+    border-bottom: .01rem solid transparent;
+}
+nav ul li:nth-child(2){
+     border-bottom-color: #ff6743;;
+     color: #ff6743;;
+}
+nav a{
+    color: #666;
+    display: inline-block;
+    padding: 0 .05rem;
+    width: .4rem;
+    border-left: .01rem solid #e6e6e6;
+    text-align: center;
+    line-height: .16rem;
+    height: .16rem;
+    background: url(https://m.juooo.com/static/img/add_icon_small.13b13aa.png) no-repeat right center;
+    background-size: .1rem;
+}
