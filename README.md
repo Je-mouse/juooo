@@ -1,19 +1,18 @@
 # juooo
 
 ## Project setup
-```
-yarn install
-```
+### 项目:聚橙购票
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+### 技术栈：
+    axios
+    vuex
+    vue-router
+    js组件封装
+    UI组件封装
+    better-scroll
+    vue-touch
+    vue-lazyload
+    UI框架
 
-### Compiles and minifies for production
-```
-yarn build
-```
+### 环境搭建：vue-cli@3
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

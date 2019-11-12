@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size:31.25vw;
+}
+html,body{
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+a{
+    text-decoration: none;
+    color: #232323;
+}
+img{
+    border: none;
+}
+/* 头部 */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: .37rem;
+    width: 100%;
+    background-color: #fff;
+    color: #232323;
+    padding: 0 .1rem;
+    box-sizing: border-box;
+    border-bottom: .01rem solid #ebebeb;
+    z-index: 100;
+}
+header h1{
+    font-weight: normal;
+    font-size: .15rem;
+}
+.icon-icon-test{
+    height:.2rem;
+    width: .2rem;
+    font-size: .2rem;
+}

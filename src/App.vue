@@ -1,13 +1,21 @@
 <template>
   <div id="app">
-    <h2>app</h2>
+    
+    <keep-alive>
+        <router-view></router-view>
+    </keep-alive>
+    <TabBar v-if="$route.meta.toggle"/>
   </div>
 </template>
 <script>
+import TabBar from "@common/components/tabBar";
 export default {
-  
+  name:"App",
+  components:{
+    TabBar
+  }
 }
 </script>
-<style lang="scss">
-
+<style>
+  #app{height:100%;}
 </style>
