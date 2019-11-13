@@ -5,6 +5,22 @@ module.exports={
             "/Show":{
                 target:"https://api.juooo.com",
                 changeOrigin:true
+            },
+            "/Scores":{
+                target:"https://m.juooo.com",
+                changeOrigin:true
+            },
+            "/Schedule":{
+                target:"https://api.juooo.com",
+                changeOrigin:true
+            },
+            "/Promotion":{
+                target:"https://api.juooo.com",
+                changeOrigin:true
+            },
+            "/api":{
+                target:"https://api.juooo.com",
+                changeOrigin:true
             }
         }
     },

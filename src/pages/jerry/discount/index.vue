@@ -2,20 +2,6 @@
     <div id="discount">
         <div>
             <Header title="专享折扣"/>
-            <!-- <nav>
-                <ul>
-                    <li>全部</li>
-                    <li>演唱会</li>
-                    <li>音乐会</li>
-                    <li>话剧歌剧</li>
-                    <li>儿童亲子</li>
-                    <li>音乐剧</li>
-                    <li>戏曲综艺</li>
-                    <li>展览</li>
-                    <li>舞蹈芭蕾</li>
-                </ul>
-                <a style="" href="#"><i class=""></i></a>
-            </nav>  -->
             <Nav font="iconfont icon-shaixuan" family="筛选"/>
         </div>
         <section>
@@ -100,8 +86,23 @@
     </div>
 </template>
 <script>
+import {discountApi} from "@api/classify"
 export default {
-    
+    name:"Discount",
+    data(){
+        return{
+
+        }
+    },
+    created(){
+        this.getDiscount();
+    },
+    methods:{
+        async getDiscount(){
+            let data= await discountApi()
+            console.log(data);
+        }
+    }
 }
 </script>
 <style>

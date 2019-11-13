@@ -4,19 +4,19 @@ export default {
     name:"classify",
     children:[
         {
-            path:"music",
-            component:_=>import("@components/music"),
-            name:"music",
+            path:"detail/:id",
+            component:_=>import("@pages/jerry/detail"),
+            name:"detail"
         },
-        {
-            path:"opera",
-            component:_=>import("@components/opera"),
-            name:"opera",
-        },
-        // {
-        //     path:"child",
-        //     component:_=>import("@components/child"),
-        //     name:"child",
-        // },
+    //     {
+    //         path:"opera",
+    //         component:_=>import("@components/opera"),
+    //         name:"opera",
+    //     },
+    //     // {
+    //     //     path:"child",
+    //     //     component:_=>import("@components/child"),
+    //     //     name:"child",
+    //     // },
     ]
 }

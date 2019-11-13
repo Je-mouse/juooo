@@ -6,7 +6,7 @@
         </div>
         <section>
              <ol>
-            <li v-for="(item,key) in data" :key="key">
+            <router-link v-for="(item,key) in data" :key="key" tag="li" :to="'/detail/'+item.schedular_id">
                 <a href="#"><img :src="item.pic"/></a>
                 <div id="right">
                     <strong>{{item.show_time_top}}</strong><span>{{item.show_time_bottom}}</span>
@@ -16,7 +16,7 @@
                     <p>{{item.city_name}}<i>|</i>{{item.venue_name}}</p>
                     <b>￥{{item.min_price}}<span>起</span></b>
                 </div>
-            </li>
+            </router-link>
         </ol>       
        
         </section>  
@@ -43,9 +43,6 @@ export default {
     created(){
         this.getGoodsList(this.id);
     },
-    mounted(){
-        //  this.getCheckIndex()
-    },
     methods:{
         getCheckIndex(index){
             this.id=index;
@@ -54,14 +51,14 @@ export default {
         async getGoodsList(id){
               let data=await classifyApi(id);
               this.data=data.data.list;
+              console.log(this.data);
         }
     }
 }
 </script>
 <style>
-    #all{background: white;z-index: 999; height: .73rem;position: absolute;width: 100%}
+       #all{background: white;z-index: 999; height: .73rem;position: absolute;width: 100%}
     /* 数据渲染 */
-
         section{ position: absolute; left: 0;right: 0;top: 0; bottom: 0;overflow: auto;padding-top: .71rem;}
         section ol{display: flex;padding: .07rem;flex-direction: column;}
         section ol li{ list-style: none;display: flex;font-size: .14rem; color: #666; padding: 0.05rem 0;}

@@ -12,73 +12,31 @@
             </nav>
             <aside>
                 <figure>
-                    <p >城市<i class="iconfont icon-xiangxia"></i></p>
+                    <v-touch tag="p" @tap="handleShowCity()" :class="tag==1?'active':''">{{city}}<i class="iconfont icon-xiangxia"></i></v-touch>
                     <p>积分<i class="iconfont icon-xiangxia"></i></p>
                 </figure>
+                <div class="city" v-show="isShow2">
+                    <v-touch tag="p" @tap="handleCity()">全国</v-touch>
+                    <v-touch tag="p" @tap="handleCity(12)">重庆</v-touch>
+                    <v-touch tag="p" @tap="handleCity(14)">长沙</v-touch>
+                    <v-touch tag="p" @tap="handleCity(51)">西安</v-touch>
+                    <v-touch tag="p" @tap="handleCity(52)">昆明</v-touch>
+                    <v-touch tag="p" @tap="handleCity(10001)">合肥</v-touch>
+                    <v-touch tag="p" @tap="handleCity(10067)">柳州</v-touch>
+                </div>
             </aside>
         </div>
         
-        <hgroup>
+        <hgroup v-show="isShow1">
             <ul>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com//group1/M00/03/32/rAoKmV2yV26ACe4wAACc_b7ouu4605.jpg" /></a>
+                <li v-for="(item,key) in goods" :key="key">
+                    <a href="#"><img :src="'https://image.juooo.com/'+item.pic"/></a>
                     <div class="right">
-                        <a href="#">"猫和老鼠的古典乐"趣味视听互动音乐会-合肥站</a>
-                        <p>时间：<span>2020.04.25 19:30</span></p>
-                        <p>城市：<span>合肥</span></p>
-                        <p>场馆：<span>合肥瑶海大剧院</span></p>
-                        <h6><b>1800</b>积分</h6><del>￥180.00</del>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com//group1/M00/03/32/rAoKmV2yV26ACe4wAACc_b7ouu4605.jpg" /></a>
-                    <div class="right">
-                        <a href="#">"猫和老鼠的古典乐"趣味视听互动音乐会-合肥站</a>
-                        <p>时间：<span>2020.04.25 19:30</span></p>
-                        <p>城市：<span>合肥</span></p>
-                        <p>场馆：<span>合肥瑶海大剧院</span></p>
-                        <h6><b>1800</b>积分</h6><del>￥180.00</del>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com//group1/M00/03/32/rAoKmV2yV26ACe4wAACc_b7ouu4605.jpg" /></a>
-                    <div class="right">
-                        <a href="#">"猫和老鼠的古典乐"趣味视听互动音乐会-合肥站</a>
-                        <p>时间：<span>2020.04.25 19:30</span></p>
-                        <p>城市：<span>合肥</span></p>
-                        <p>场馆：<span>合肥瑶海大剧院</span></p>
-                        <h6><b>1800</b>积分</h6><del>￥180.00</del>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com//group1/M00/03/32/rAoKmV2yV26ACe4wAACc_b7ouu4605.jpg" /></a>
-                    <div class="right">
-                        <a href="#">"猫和老鼠的古典乐"趣味视听互动音乐会-合肥站</a>
-                        <p>时间：<span>2020.04.25 19:30</span></p>
-                        <p>城市：<span>合肥</span></p>
-                        <p>场馆：<span>合肥瑶海大剧院</span></p>
-                        <h6><b>1800</b>积分</h6><del>￥180.00</del>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="#"><img src="https://image.juooo.com//group1/M00/03/32/rAoKmV2yV26ACe4wAACc_b7ouu4605.jpg" /></a>
-                    <div class="right">
-                        <a href="#">"猫和老鼠的古典乐"趣味视听互动音乐会-合肥站</a>
-                        <p>时间：<span>2020.04.25 19:30</span></p>
-                        <p>城市：<span>合肥</span></p>
-                        <p>场馆：<span>合肥瑶海大剧院</span></p>
-                        <h6><b>1800</b>积分</h6><del>￥180.00</del>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com//group1/M00/03/32/rAoKmV2yV26ACe4wAACc_b7ouu4605.jpg" /></a>
-                    <div class="right">
-                        <a href="#">"猫和老鼠的古典乐"趣味视听互动音乐会-合肥站</a>
-                        <p>时间：<span>2020.04.25 19:30</span></p>
-                        <p>城市：<span>合肥</span></p>
-                        <p>场馆：<span>合肥瑶海大剧院</span></p>
-                        <h6><b>1800</b>积分</h6><del>￥180.00</del>
+                        <a href="#">{{item.schedular_name}}</a>
+                        <p>时间：<span>{{item.show_time}}</span></p>
+                        <p>城市：<span>{{item.city_time}}</span></p>
+                        <p>场馆：<span>{{item.venue_time}}</span></p>
+                        <h6><b>{{item.scores}}</b>积分</h6><del>￥{{item.ticket_price}}</del>
                     </div>
                 </li>
             </ul>
@@ -86,8 +44,47 @@
     </div>
 </template>
 <script>
+import {creditApi} from "@api/credit"
 export default {
-    name:"Credit"
+    name:"Credit",
+    data(){
+        return{
+            city:"城市",
+            cityId:0,
+            goods:[],
+            tag:"",
+            isShow2:"",
+            isShow1:true
+        }
+    },
+    created(){
+        this.getGoods();
+    },
+    methods:{
+        async getGoods(params){
+            console.log(params)
+            let data= await creditApi(params);
+            this.goods=data.data.list;
+        },
+        handleShowCity(){
+            if(this.tag==1){        //显示----->隐藏
+                this.isShow2=false;
+                this.isShow1=true;
+                this.tag=0;
+            }else{                  //隐藏----->显示
+                this.tag=1;
+                this.isShow2=true;
+                this.isShow1=false;
+            }  
+        },
+        handleCity(index){
+            this.isShow2=false;
+            this.isShow1=true;
+            this.cityId=index;
+            this.getGoods(this.cityId);
+        }
+        
+    }
 }
 </script>
 <style>
@@ -117,6 +114,12 @@ export default {
         color: #666;
     }
     figure p{ font-size: .13rem;}
+    .city{
+        font-size: .14rem;
+        color:#999;
+    }
+    .city p{padding: 0 .1rem;border-bottom: .01rem solid #efefef;line-height: .5rem;font-size: .12rem;
+    color: #666;}
     /*商品*/
     hgroup{
         padding-top: 0.05rem;
@@ -162,4 +165,5 @@ export default {
         display: inline-block;
         margin-left: -0.1rem;
     } 
+    .active{color: red}
 </style>

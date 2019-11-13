@@ -8,7 +8,7 @@ const server = axios.create({
 
 //请求的拦截
 server.interceptors.request.use((config)=>{
-    if(config.method == "get"){
+    if(config.method == "get" ){
         config.params = {...config.data};
     }
 

@@ -2,7 +2,7 @@
     <div id="detail">
          <!-- <div> -->
          <div class="imag">
-            <img src="https://image.juooo.com/group1/M00/02/FA/rAoKNVyZ8TyAM5wVAABHcoBcoJ8139.jpg"/>
+            <img :src="static_data.pic"/>
         </div>
         <div class="image"></div>
         <div class="top">
@@ -17,11 +17,11 @@
             </Header>
             <div class="content">
                 <div class="page">
-                    <img src="https://image.juooo.com/group1/M00/02/FA/rAoKNVyZ8TyAM5wVAABHcoBcoJ8139.jpg" />
+                    <img :src="static_data.pic" />
                 </div>
                 <div class="right">
-                    <p>发育应跃居的违法热风奉公如法</p>
-                    <span>￥180-1080</span>
+                    <p>{{static_data.show_name}}</p>
+                    <span>￥{{static_data.price_range}}</span>
                 </div>
             </div>
         </div>
@@ -31,8 +31,8 @@
                 <a>11/14-11/17<i class="iconfont icon-xiangyou"></i></a>
                 <div class="addr">
                     <div>
-                        <h3>见到你胃口了打开了我国</h3>
-                        <span>见到你胃口了打开了我国</span>
+                        <h3>{{city_name}}|{{venue_name}}</h3>
+                        <span>{{venue_address}}</span>
                     </div>
                     <p><i class="iconfont icon-dingwei"></i></p>
                 </div>
@@ -52,8 +52,9 @@
                 <div class="list">
                     <span>VIP+：</span>
                     <div class="vip">
-                        V+会员享
-                        <i class="credit">好的乌克兰</i>
+                        V+会员专享活动，指定票价
+                        <i class="credit">{{discount}}</i>
+                        折
                     </div>
                     <a class="iconfont icon-icongengduo"></a>
                 </div>
@@ -67,36 +68,34 @@
                 </div>
                 <div class="list">
                     <span>入场：</span>
-                    <div class="come">一人一票,凭票入场</div>
+                    <div class="come">{{desc}}</div>
                 </div>
                 <div class="list">
                     <span>支持：</span>
                     <div class="agree">
-                        <a>在线选做</a>
-                        <a>人一票</a>
-                        <a>凭票入场</a>
+                        <a v-for="(item,key) in static_data.support" :key="key">{{item.key}}</a>
                     </div>
                 </div>
             </div>
             <div class="three">
                 <div class="head">
                     <h2>巡演城市</h2>
-                    <span><i>46</i>场<a class="iconfont icon-icongengduo"></a></span>
+                    <span><i>{{city.length}}</i>场<a class="iconfont icon-icongengduo"></a></span>
                 </div>
                 <div class="main">
                     <ul>
-                        <li>
+                        <li v-for="(item,key) in city" :key="key">
+                            <h5>{{item.city_name}}</h5>
+                            <p>{{item.show_time}}</p>
+                        </li>
+                        <!-- <li>
                             <h5>北京</h5>
                             <p>10/25-11/03</p>
                         </li>
                         <li>
                             <h5>北京</h5>
                             <p>10/25-11/03</p>
-                        </li>
-                        <li>
-                            <h5>北京</h5>
-                            <p>10/25-11/03</p>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -235,8 +234,60 @@
     </div>
 </template>
 <script>
+import {detailApi} from "@api/classify.js"
+import {detailCutApi} from "@api/classify.js"
+import {detailCityApi} from "@api/classify.js"
+// import {detailCutApi} from "@api/classify.js"
+
 export default {
-    
+    data(){
+        return{
+            static_data:"",
+            share_list:"",
+            ticket_list:[],
+            city_name:"",
+            venue_name:"",
+            venue_address:"",
+            city:"",
+            desc:"",
+            discount:""
+        }
+    },
+    created(){
+        this.getDetailGood(this.$route.params.id);
+    },
+    methods:{
+        async getDetailGood(goodsId){
+            let data =await detailApi(goodsId);
+            // console.log(data.data.share_data.share_desc);
+            this.share_list=data.data.share_data;
+            this.static_data=data.data.static_data;//获取数据
+            this.ticket_list=data.data.vip.discount[0].ticket_list;//获取优惠参数
+            this.discount=this.ticket_list[0].discount;//获取折扣
+            // console.log(this.ticket_list);
+
+            let show_id=this.static_data.show_id;   //演出ID
+            let venue_id=this.static_data.venue.venue_id;   //地点ID
+
+            this.city_name=this.static_data.city.city_name; //城市名
+            this.venue_name=this.static_data.venue.venue_name;  //演出地点名
+            this.venue_address=this.static_data.venue.venue_address;     //演出地址
+            this.desc=this.static_data.tips.desc;
+
+            // console.log(show_id,venue_id);
+            // this.getTickets(ticket);
+            this.getDetailCut(this.ticket_list[0].ticke_id);
+            this.getDetailCity(show_id,venue_id);
+        },
+        async getDetailCut(id){//
+            let data = await detailCutApi(id);
+            // console.log(data);
+        },
+        async getDetailCity(show_id,venue_id){
+            let data =await detailCityApi(show_id,venue_id)
+            this.city=data.data.tour_list;
+        }
+    }
 }
 </script>
 <style>
@@ -308,10 +359,12 @@ export default {
         box-sizing: border-box;
         background: white;
     }
-   #detail section a{font-size: .1536rem;font-weight: bold;}
-   #detail section a i{font-size: .08rem;}
-   #detail .one .addr{display: flex;font-size: .128rem;justify-content: space-between;}
-   #detail .one .addr p{height: .3413rem;width: .3413rem;border-radius: 50%;line-height: .3413rem;text-align: center;background: #ededed;}
+    #detail section a{font-size: .1536rem;font-weight: bold;}
+    #detail section a i{font-size: .08rem;}
+    #detail .one .addr{display: flex;font-size: .128rem;justify-content: space-between;}
+    #detail .one .addr p{height: .3413rem;width: .3413rem;border-radius: 50%;line-height: .3413rem;text-align: center;background: #ededed;}
+    #detail .one .addr span{font-size: .12rem;height: .15rem;overflow: hidden;display: block;width: 2.5rem;white-space: nowrap;text-overflow: ellipsis;}
+    #detail .one .addr h3{font-size:.14rem}
 
    #detail section .card{height: .3753rem;display: flex;justify-content: center;align-items: center;padding: 0 .1208rem .1408rem;margin-bottom: .1rem;background: white;}
     .card a{width: 2.944rem;height: .3753rem;}
@@ -319,7 +372,7 @@ export default {
 
    #detail section .two{margin: .1rem 0;display: flex;flex-direction: column;padding: 0 .1rem;background:white;color: #999;font-size: .12rem;}
     .two i{font-style: normal;}
-    .two .list{display: flex;height: .409rem;box-sizing: border-box;line-height: .409rem;align-items: center;}
+    .two .list{display: flex;height: .409rem;box-sizing: border-box;align-items: center;}
     .two span{width: .38rem;display: block;}
     .two .first a{font-weight: normal;}
     .quan{display: flex;color: white;width: 2.371rem;align-items: center;}
@@ -338,19 +391,19 @@ export default {
     .two .cut{display: flex;width: 2.371rem;align-items: center;font-size: .12rem;color: #222;}
     .cut1{transform: scale(0.8);color: #ff6743;font-size: .12rem;border: .01rem solid #ff6743;line-height: .14rem;padding: .01rem;border-radius: .04rem;}
      /*  */
-    .two .come{font-size: .12rem;color: #222;}
+    .two .come{font-size: .12rem;color: #222;white-space: nowrap; width: 2.4rem;overflow: hidden;text-overflow: ellipsis;}
      /*  */
     .two .agree{display: flex;}
-    .agree a{display: block;padding: 0 .1rem;border-right: 1px solid #999;height: .12rem;color: #999;font-weight: normal;font-size: .12rem;line-height: .12rem;}
-    .agree a:last-child{border: none;}
+    #detail .agree a{display: block;padding: 0 .1rem;border-right: 1px solid #999;height: .12rem;color: #999;font-weight: normal;font-size: .12rem;line-height: .12rem;}
+    #detail .agree a:last-child{border: none;}
 
-   #detail section .three{height: 1.175rem;font-size: .12rem;padding: .1024rem;background: white;}
+    #detail section .three{height: 1.175rem;font-size: .12rem;padding: .1024rem;background: white;}
     .three .head{display: flex;justify-content: space-between;padding: 0 .05rem 0 0;height: .4692rem;}
         
     .three .head i{ color: #ff6743;font-style: normal;}
     .three .head a{margin-left: .1rem;}
-
-    .three .main ul{display: flex;justify-content: space-around;}
+    .three .main{height: .6rem;overflow: hidden;}
+    .three .main ul{display: flex;justify-content: space-between;overflow-x: scroll;height: .8rem;}
     .three .main ul li{
         height:.511rem ;
         width: .768rem;
@@ -363,13 +416,14 @@ export default {
         align-items: center;
         box-sizing: border-box;
         justify-content: center;
+        margin:0 .2rem;
     }
-    .main li h5{color: #232323;}
+    .main li h5{color: #232323;white-space: nowrap;margin: 0 .15rem;}
     .main li p{color: #666;}
     
    #detail article{margin-top: .1rem;padding: 0 .128rem;background: white;}
    #detail article h2{height: .3rem;line-height: .4rem;}
-    .passage div{width: 2.944rem;height: 1.959rem;} 
+   #detail.passage div{width: 2.944rem;height: 1.959rem;} 
     .passage div img{height: 100%;width: 100%;}
     .passage p{text-align: center;white-space: pre-wrap;font-size: .12rem;line-height: .2rem;}
     .passage p strong{font-size: .18rem;}

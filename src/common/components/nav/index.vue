@@ -1,15 +1,15 @@
 <template>
      <nav>
         <ul>
-            <v-touch @tap="handleCheck(1)" tag="li">全部</v-touch>
-            <v-touch @tap="handleCheck(1)" tag="li">演唱会</v-touch>
-            <v-touch @tap="handleCheck(2)" tag="li">音乐会</v-touch>
-            <v-touch @tap="handleCheck(3)" tag="li">话剧歌剧</v-touch>
-            <v-touch @tap="handleCheck(4)" tag="li">儿童亲子</v-touch>
-            <v-touch @tap="handleCheck(5)" tag="li">音乐剧</v-touch>
-            <v-touch @tap="handleCheck(6)" tag="li">戏曲综艺</v-touch>
-            <v-touch @tap="handleCheck(7)" tag="li">展览</v-touch>
-            <v-touch @tap="handleCheck(8)" tag="li">舞蹈芭蕾</v-touch>
+            <v-touch @tap="handleCheck(-1)" tag="li" :class="flag==-1?'active':''">全部</v-touch>
+            <v-touch @tap="handleCheck(0)" tag="li" :class="flag==0?'active':''">演唱会</v-touch>
+            <v-touch @tap="handleCheck(1)" tag="li" :class="flag==1?'active':''">音乐会</v-touch>
+            <v-touch @tap="handleCheck(2)" tag="li" :class="flag==2?'active':''">话剧歌剧</v-touch>
+            <v-touch @tap="handleCheck(3)" tag="li" :class="flag==3?'active':''">儿童亲子</v-touch>
+            <v-touch @tap="handleCheck(4)" tag="li" :class="flag==4?'active':''">音乐剧</v-touch>
+            <v-touch @tap="handleCheck(5)" tag="li" :class="flag==5?'active':''">戏曲综艺</v-touch>
+            <v-touch @tap="handleCheck(6)" tag="li" :class="flag==6?'active':''">展览</v-touch>
+            <v-touch @tap="handleCheck(7)" tag="li" :class="flag==7?'active':''">舞蹈芭蕾</v-touch>
         </ul>
         <a href="#">{{family?family:"全国"}}<i :class="font?font:''"></i></a>
     </nav>        
@@ -20,7 +20,8 @@ export default {
     name:"Nav",
     data(){
         return{
-            gid:38
+            gid:38,
+            flag:"0"
         }
     },
     props:{
@@ -39,15 +40,18 @@ export default {
     methods:{
         handleCheck(index){
             switch(index){
-                case 1:this.id=35;break;
-                case 2:this.id=36;break;
-                case 3:this.id=37;break;
-                case 4:this.id=38;break;
-                case 5:this.id=79;break;
-                case 6:this.id=91;break;
-                case 7:this.id=99;break;
-                case 8:this.id=86;break;
+                case -1:this.id=0;break;
+                case 0:this.id=35;break;
+                case 1:this.id=36;break;
+                case 2:this.id=37;break;
+                case 3:this.id=38;break;
+                case 4:this.id=79;break;
+                case 5:this.id=91;break;
+                case 6:this.id=99;break;
+                case 7:this.id=86;break;
             } 
+            this.flag=index;
+            console.log(this.flag);
             this.$emit("handle",this.id);
         },
     }
