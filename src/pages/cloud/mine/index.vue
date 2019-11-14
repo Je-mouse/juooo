@@ -109,7 +109,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
    *{margin:0;padding:0;}
     html, body {position: relative;height: 100%;font-size:31.25vw;}
     body {font-size: 14px;display:flex;flex-direction: column;background:#ebebeb;}
@@ -136,7 +136,7 @@ export default {
     .header .userinfo .situation ul li .line{width:0.01rem;height:0.256rem;background: #ebebeb;position:absolute;right:0;bottom:0.16rem;}
     
     
-    .card{width:100%;height:0.768rem;box-sizing:border-box;padding:0 0.021rem;}
+    .card{width:100%;height:0.768rem;box-sizing:border-box;padding:0 0.021rem;margin-top:.03rem;}
     .card img{width:100%;}
 
 

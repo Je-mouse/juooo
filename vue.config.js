@@ -11,9 +11,14 @@ module.exports={
                 changeOrigin:true
             },
             "/user":{
-                target:"https://api.juooo.com/",
+                target:"https://api.juooo.com",
+                changeOrigin:true
+            },
+            "/Show":{
+                target:"https://api.juooo.com",
                 changeOrigin:true
             }
+
         }
     },
     configureWebpack:{

@@ -6,7 +6,7 @@
           <i class="iconfont">&#xe600;</i>
           <span>全国</span>
         </div>
-        <input type="text" placeholder="搜索热门演出" />
+        <input type="text" placeholder="搜索热门演出" @click="handleSearch()"/>
         <div class="head-space" v-for="(img,imgpic) in top_icon" :key="imgpic">
           <img 
             :src="img.pic"
@@ -40,7 +40,7 @@
         </div>
         <div class="card">
           <img
-            :src="this.advert"
+            :src="advert"
             alt
           />
         </div>
@@ -90,6 +90,21 @@
         </ul>
       </div>
 
+      <div class="show">
+            <h3 class="h3">巡回演出
+                <span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAALVBMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaTgChpAAAAD3RSTlMA/Aa1qrzcwa+ezcijk5JAYXVXAAAAVUlEQVQoz2MYtoDNAIsghzA2pYEOWASZRbApNWzAIqiKTSlT4QEsouqS2JQGXsAiqpVApCDTxgeYgtoy2OyZQJyLmAqxhAirBLbwcCAy5NgaGIYzAADnxQppL/x7ngAAAABJRU5ErkJggg==" alt=""></span>
+            </h3>
+            <ul class="show_box">
+              <div>
+                <li class="show_heng" v-for="(xunhuiList,xun) in xunhuiList" :key="xun">
+                    <img :src="xunhuiList.pic">
+                    <h3>{{xunhuiList.show_name}}</h3>
+                    <p>{{xunhuiList.schedular_num}}场巡演</p>
+                </li>
+              </div>
+            </ul>
+        </div>
+
       <div class="vip">
         <div class="member">
           <img src="../../../../public/img/vip.jpg" alt />
@@ -97,7 +112,7 @@
         <div class="vip_box">
           <div class="left">
             <h3>
-              专属票价
+              免费观影
               <span>
                 <img
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAALVBMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaTgChpAAAAD3RSTlMA/Aa1qrzcwa+ezcijk5JAYXVXAAAAVUlEQVQoz2MYtoDNAIsghzA2pYEOWASZRbApNWzAIqiKTSlT4QEsouqS2JQGXsAiqpVApCDTxgeYgtoy2OyZQJyLmAqxhAirBLbwcCAy5NgaGIYzAADnxQppL/x7ngAAAABJRU5ErkJggg=="
@@ -105,14 +120,14 @@
                 />
               </span>
             </h3>
-            <div class="left_vip">
+            <div class="left_vip" v-if="zhuan[0]">
               <img
-                :src="this.zhuan.pic"
+                :src="zhuan[0].pic"
                 alt
               />
               <p>
-                ￥{{parseInt(zhuan.fixed_price)}}
-                <del>￥{{parseInt(zhuan.price)}}</del>
+                ￥{{0}}
+                <del>￥{{parseInt(zhuan[0].price)}}</del>
               </p>
             </div>
           </div>
@@ -126,7 +141,7 @@
                 />
               </span>
             </h3>
-            <div class="right_vip">
+            <div class="right_vip" v-if="zhe">
               <img
                 :src="zhe.pic"
                 alt
@@ -151,7 +166,7 @@
             </span>
           </h3>
           <div class="warp_list-box">
-            <div class="warp_list-row">
+            <div class="warp_list-row" v-if="music">
               <img
                 :src="music.pic"
                 alt
@@ -166,7 +181,7 @@
               </div>
             </div>
           </div>
-          <div class="warp_list-column">
+          <div class="warp_list-column" v-if="musiclist">
             <ul>
               <li v-for="(musiclist,sche_id) in musiclist" :key="sche_id">
                 <img
@@ -194,45 +209,35 @@
           </span>
         </h3>
         <div class="bao">
-          <div class="place_box">
+          <div class="place_box" v-for="(hotguan,index) in hotguan" :key="index">
             <div class="place_box-list">
               <div class="addres">
                 <div class="addres_img">
                   <img
-                    src="https://image.juooo.com//group1/M00/01/D2/rAoKmVwknq2AQjJ3AABZC2s-o9o803.jpg"
+                    :src="hotguan.pic"
                     alt
                   />
                 </div>
                 <div class="addres_font">
                   <div class="ell">
-                    <h3>南山文体中心</h3>
+                    <h3>{{hotguan.name}}</h3>
                   </div>
-                  <p>132场在售演出</p>
+                  <p>{{hotguan.count}}场在售演出</p>
                 </div>
                 <div class="addres_icon">
                   <i>...</i>
                 </div>
               </div>
               <div class="data">
-                <p>
-                  <span>11月09日</span>
-                  <span></span>
-                </p>
-                <p>
-                  <span>11月09日</span>
+                <p v-for="(n,i) in hotguan.showList" :key="i">
+                  <span>{{n.show_time}}</span>
                   <span></span>
                 </p>
               </div>
               <ul>
-                <li>
+                <li v-for="(n,i) in hotguan.showList" :key="i">
                   <img
-                    src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"
-                    alt
-                  />
-                </li>
-                <li>
-                  <img
-                    src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"
+                    :src="n.pic"
                     alt
                   />
                 </li>
@@ -245,7 +250,7 @@
     <div class="foryou">
       <h4>为你推荐</h4>
       <div class="all">
-        <div class="showlist" v-for="(foryou,red) in foryou" :key="red">
+        <div class="showlist" v-for="(foryou,red) in foryou" :key="red" >
           <div class="showlist_img">
             <img
               :src="foryou.schePic"
@@ -273,7 +278,7 @@
 </template>
 
 <script>
-import {juoooApi,juoooMiddleApi,juoooForYouApi ,juooofenleiApi} from "@api/juooo";
+import {juoooApi,juoooMiddleApi,juoooForYouApi ,juooofenleiApi,juoooXunHuiApi,juoooHotGuanApi} from "@api/juooo";
 import {vipApi} from "@api/vip";
 export default {
   name: "Juooo",
@@ -292,6 +297,8 @@ export default {
       zhe:"",//专享折扣
       music:"",//音乐会
       musiclist:[],//音乐会例表
+      xunhuiList:[],//巡回演出
+      hotguan:[],//热门场馆
     }
   },
   created(){
@@ -300,23 +307,28 @@ export default {
     this.handleGetForList();
     this.handleGetDiscount();//折扣
     this.handleGetFenLei();
+    this.handleGetXunHui();
+    this.handleGetHotGuan();
   },
   methods:{
     async handleGetJuoooList(){
       let data = await juoooApi();
       this.top_icon = data.data.top_icon;
-      this.advert = data.data.ad_list.advert1[0].pic;
+      this.advert = data.data.ad_list.insert_ad[0].pic;
       this.classify_list = data.data.classify_list;
-      this.slide_list = data.data.slide_list
+      this.slide_list = data.data.slide_list;
+      // console.log(this.slide_list)
+      console.log(this.classify_list)
       this.operation_list = data.data.operation_list;
       for(var i=0;i<this.operation_list.length;i++){
         this.ollist = this.operation_list.slice(0,2);
-        this.ullist = this.operation_list.slice(-3);
+        this.ullist = this.operation_list.slice(-3); 
       }
     },
     async handleGetShowList(){
       let data = await juoooMiddleApi();
       this.show_list = data.data.hots_show_list;
+      
     },
     async handleGetForList(){
       let data = await juoooForYouApi();
@@ -324,16 +336,27 @@ export default {
     },
     async handleGetDiscount(){
       let data = await vipApi();
-      this.zhuan = data.data.exclusiveList.list[0];
+      this.zhuan = data.data.watchList;//免费观影
       this.zhe = data.data.discountList[0];
     },
     async handleGetFenLei(){
       let data = await juooofenleiApi();
       this.music = data.data[4].list.slice(0,1)[0];
       this.musiclist = data.data[4].list.slice(1)
-      console.log(this.musiclist)
+      //console.log(this.musiclist)
       //console.log(this.music)
       //console.log(data)
+    },
+    async handleGetXunHui(){
+      let data = await juoooXunHuiApi();
+      this.xunhuiList = data.data.tour_show_list;
+    },
+    async handleGetHotGuan(){
+      let data = await juoooHotGuanApi();
+      this.hotguan = data.data.theatre_list;
+    },
+    handleSearch(){
+      this.$router.push("/search")
     }
   },
   mounted() {
@@ -414,6 +437,18 @@ li{list-style:none;}
               -webkit-line-clamp:2;}
 
 
+.show{width:100%;height:2rem;padding:.2rem 0 .13rem;position:relative;background:#f5f5f5;}
+.show .h3{width:100%;height:.23rem;display: flex;justify-content: space-between;padding-left:.15rem;box-sizing: border-box;font-size:.23rem;}
+.show span img{width:.2rem;}
+.show .show_box{width:100%;height:2rem;margin-top:.15rem;overflow: hidden;}
+.show .show_box div{width:100%;overflow: auto;display: flex;}
+.show .show_box .show_heng{width:2.09rem;margin-right:.2rem;}
+.show .show_box .show_heng  img{width:2.09rem;height:1.07rem;}
+.show .show_box .show_heng  h3{text-align:center;height:.2rem;font-size:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.show .show_box .show_heng  p{height:.2rem;font-size:.05rem;color: #666;line-height:.2rem; text-align: center;}
+
+
+
 .vip{width:100%;height:2.744rem;overflow: hidden;}
 .vip .member{width:100%;height:.4rem;}
 .vip .member img{width:100%;}
@@ -479,7 +514,7 @@ li{list-style:none;}
 .place .place_box .place_box-list .data p:nth-of-type(2) span:nth-of-type(2){display: block;width:0.06rem;height:0.06rem;background-color: #ccc;border-radius: 50%;}
 .place .place_box .place_box-list ul{width:100%;height:1.266rem;margin-top:.15rem;display:flex;justify-content: space-between;}
 .place .place_box .place_box-list ul li{border: 1px solid #ebebeb;}
-.place .place_box .place_box-list ul li img{width:.824rem;}
+.place .place_box .place_box-list ul li img{width:.824rem;height:1.236rem;}
 
 
 

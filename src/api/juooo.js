@@ -42,3 +42,21 @@ export const juooofenleiApi = ()=>http({
     }
 })
 
+export const juoooXunHuiApi =()=>http({
+    method:"get",
+    url:"/home/index/getTourRecommendList",
+    data:{
+        city_id:0,
+        version:"6.0.8",
+        referer:2
+    }
+})
+
+export const juoooHotGuanApi = ()=>http({
+    method:"get",
+    url:"home/index/getHotTheatre",
+    data:{
+        version:"6.0.8",
+        referer:2
+    }
+})
