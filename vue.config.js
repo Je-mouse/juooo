@@ -18,7 +18,15 @@ module.exports={
                 target:"https://api.juooo.com",
                 changeOrigin:true
             },
-            "/api":{
+            "/vip":{
+                target:"https://api.juooo.com",
+                changeOrigin:true
+            },
+            "/tour":{
+                target:"https://m.juooo.com",
+                changeOrigin:true
+            },
+            "/theatre":{
                 target:"https://api.juooo.com",
                 changeOrigin:true
             }
@@ -36,6 +44,7 @@ module.exports={
                 "@store": path.join(__dirname, "./src/store"),
                 "@utils": path.join(__dirname, "./src/utils"),
                 "@api": path.join(__dirname, "./src/api"),
+                "@lib": path.join(__dirname, "./src/lib"),
             }
         }
     }

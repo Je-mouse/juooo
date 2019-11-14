@@ -17,23 +17,17 @@
                     <b>￥{{item.min_price}}<span>起</span></b>
                 </div>
             </router-link>
-        </ol>       
-       
+        </ol>      
         </section>  
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-// import Nav from "@common/components/nav"
-// import {mapState} from "vuex"
 import {classifyApi} from "@api/classify"
 
 export default {
     name:"Classify",
-    // components:{
-    //     Nav,
-    // },
     data(){
         return{
             id:35,
@@ -44,6 +38,7 @@ export default {
         this.getGoodsList(this.id);
     },
     methods:{
+        //导航实现
         getCheckIndex(index){
             this.id=index;
             this.getGoodsList(this.id);
@@ -74,10 +69,13 @@ export default {
             font-size: .14rem; 
             margin-top: .1rem;
             padding-right: .1rem;
-            text-overflow: ellipsis;
-            overflow: hidden;
             width: 1.9rem;
             height: .38rem;
+             text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             }
         /* #right a h6{ white-space: nowrap;width: 2rem;overflow: hidden;text-overflow: ellipsis; } */
         /* #right a h5{} */

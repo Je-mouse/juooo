@@ -1,292 +1,215 @@
 <template>
     <div id="detail">
-         <!-- <div> -->
-         <div class="imag">
-            <img :src="static_data.pic"/>
-        </div>
-        <div class="image"></div>
-        <div class="top">
-            <!-- <Header title="演出详情" id="header" icon=""/> -->
-            <Header title="演出详情" icon2="1">
-                <template>
-                    <div slot="iconfont">
-                        <a href="#" class="iconfont icon-fenxiang"></a>
-                        <a href="#" class="iconfont icon-zhuye"></a>
+        <Loading v-if="isshow==true?'false':''"/>
+        <div v-show="isshow">
+            <div class="imag" >
+                <img :src="static_data.pic"/>
+            </div>
+            <div class="image"></div>
+            <div class="top" >
+                <Header title="演出详情" icon2="1">
+                    <template>
+                        <div slot="iconfont">
+                            <a href="#" class="iconfont icon-fenxiang"></a>
+                            <a href="#" class="iconfont icon-zhuye"></a>
+                        </div>
+                    </template>
+                </Header>
+                <div class="content" >
+                    <div class="page">
+                        <img :src="static_data.pic" />
                     </div>
-                </template>
-            </Header>
-            <div class="content">
-                <div class="page">
-                    <img :src="static_data.pic" />
-                </div>
-                <div class="right">
-                    <p>{{static_data.show_name}}</p>
-                    <span>￥{{static_data.price_range}}</span>
+                    <div class="right">
+                        <p>{{static_data.show_name}}</p>
+                        <span>￥{{static_data.price_range}}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-       <!-- </div> -->
-        <section>
-            <div class="one">
-                <a>11/14-11/17<i class="iconfont icon-xiangyou"></i></a>
-                <div class="addr">
-                    <div>
-                        <h3>{{city_name}}|{{venue_name}}</h3>
-                        <span>{{venue_address}}</span>
+            <section >
+                <div class="one">
+                    <a>{{show_time}}<i class="iconfont icon-xiangyou"></i></a>
+                    <div class="addr">
+                        <div>
+                            <h3>{{city_name}}|{{venue_name}}</h3>
+                            <span>{{venue_address}}</span>
+                        </div>
+                        <p><i class="iconfont icon-dingwei"></i></p>
                     </div>
-                    <p><i class="iconfont icon-dingwei"></i></p>
                 </div>
-            </div>
-            <div class="card">
-            <a><img src="https://image.juooo.com////////group1/M00/03/8E/rAoKNV1A4fOAa67LAAINvajdFbc475.png"/></a> 
-            </div>
-            <div class="two">
-                <div class="list">
-                    <span>领券：</span>
-                    <div class="quan">
-                        <i class="quan1">满400减120</i>
-                        <i class="quan2">满400减120</i>
-                    </div>
-                    <a class="iconfont icon-xiangyou"></a>
+                <div class="card">
+                <a><img :src="static_data.pic"/></a> 
                 </div>
-                <div class="list">
-                    <span>VIP+：</span>
-                    <div class="vip">
-                        V+会员专享活动，指定票价
-                        <i class="credit">{{discount}}</i>
-                        折
+                <div class="two">
+                    <div class="list">
+                        <span>VIP+：</span>
+                        <div class="vip">
+                            V+会员专享活动，指定票价
+                            <i class="credit">{{discount}}</i>
+                            折
+                        </div>
+                        <a class="iconfont icon-icongengduo"></a>
                     </div>
+                    <div class="list">
+                        <span>优惠：</span>
+                        <div class="cut">
+                            <i class="cut1">折扣</i>
+                            <i class="cut2">满满满400减120</i>
+                        </div>
+                        <a class="iconfont icon-xiangyou"></a>
+                    </div>
+                    <div class="list">
+                        <span>入场：</span>
+                        <div class="come">{{desc}}</div>
+                    </div>
+                    <div class="list">
+                        <span>支持：</span>
+                        <div class="agree">
+                            <a v-for="(item,key) in support" :key="key">{{item}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="three">
+                    <div class="head">
+                        <h2>巡演城市</h2>
+                        <span><i>{{city.length}}</i>场<a class="iconfont icon-icongengduo"></a></span>
+                    </div>
+                    <div class="main">
+                        <ul>
+                            <li v-for="(item,key) in city" :key="key">
+                                <h5>{{item.city_name}}</h5>
+                                <p>{{item.show_time}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <article>
+                    <h2>演出介绍</h2>
+                    <div class="passage">
+                        <div><img :src="share_pic"/></div>
+                        <p>&nbsp;</p>
+                        <p><strong>故事简介</strong></p>
+                        <p>{{share_data}}</p>
+                    </div>
+                </article>
+                <div class="tip">
+                <aside>
+                    <h2>温馨提示</h2>
                     <a class="iconfont icon-icongengduo"></a>
+                </aside>
+                <ol>
+                    <li><div></div>配送说明</li>
+                    <li><div></div>订票说明</li>
+                    <li><div></div>确认订单</li>
+                    <li><div></div>购票提醒</li>
+                </ol>
                 </div>
-                <div class="list">
-                    <span>优惠：</span>
-                    <div class="cut">
-                        <i class="cut1">折扣</i>
-                        <i class="cut2">满满满400减120</i>
-                    </div>
-                    <a class="iconfont icon-xiangyou"></a>
+                <div class="other">
+                    <h2>相关推荐</h2>
+                    <dl>
+                        <!-- <a href=""> -->
+                        <dd v-for="(item,key) in show_data" :key="key">
+                            <div><img :src="item.pic"/></div>
+                            <hgroup>
+                                <h5>{{item.show_time_top}}</h5>
+                                <h6><p>{{item.name}}</p></h6>
+                                <span>{{item.city_name}}<i>|</i>{{item.venue_name}}</span>
+                                <span><strong>￥{{item.min_price}}</strong>起</span>
+                            </hgroup> 
+                        </dd>
+                    </dl>
+                </div>    
+            </section>
+            <footer >
+                <div class="tel">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAb1BMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmbw3/OPAAAAJHRSTlMAH4DvLAySB/Tg05n5rk3opHxiwKCKOhUP4qh0M9jNbli4hSkY6Xp9AAABR0lEQVQ4y52R6ZKCMBAGB8IREg4FEVA8drff/xlXsHZLNAhl/yJDJ1/NjHxInNuzBn22eSzztL7iH+W3c15eABRVllX3r9zt1YCqAxkJagXULs8C0UNaGwH21duCforKNWyfvT3o/UtRw1MxPsFVXrjCaTqmEjbiYAPlpGBIPZfopZjHczA+OPNk8HC8QD6zBLhM74VuMZxkxYZEZkgwf303VkFaur0yBWWbsZGCkcDlBYwUt59hAklk4egSj2CjwQiHHWexeOC7RB88ibNh5wYVyntRQoWRlIMsiXIgFYiWxQhWi6ujVzezfjzDwLv3A++Gga9e4Y0mUqBLcfINqKiRO7EXhOJmB9dYltmDkRU0CeQrvJ8TbGSGPgFI+tsS6hTO4ZyYMWKsAfhqZY4KvdtpRtRFZFlUWTnGLkRXnizQdwBdL5/yC+1CKknvBpjdAAAAAElFTkSuQmCC"/>
+                    <span>客服</span>
                 </div>
-                <div class="list">
-                    <span>入场：</span>
-                    <div class="come">{{desc}}</div>
-                </div>
-                <div class="list">
-                    <span>支持：</span>
-                    <div class="agree">
-                        <a v-for="(item,key) in static_data.support" :key="key">{{item.key}}</a>
-                    </div>
-                </div>
-            </div>
-            <div class="three">
-                <div class="head">
-                    <h2>巡演城市</h2>
-                    <span><i>{{city.length}}</i>场<a class="iconfont icon-icongengduo"></a></span>
-                </div>
-                <div class="main">
-                    <ul>
-                        <li v-for="(item,key) in city" :key="key">
-                            <h5>{{item.city_name}}</h5>
-                            <p>{{item.show_time}}</p>
-                        </li>
-                        <!-- <li>
-                            <h5>北京</h5>
-                            <p>10/25-11/03</p>
-                        </li>
-                        <li>
-                            <h5>北京</h5>
-                            <p>10/25-11/03</p>
-                        </li> -->
-                    </ul>
-                </div>
-            </div>
-            <article>
-                <h2>演出介绍</h2>
-                <div class="passage">
-                    <div><img src="https://image.juooo.com////////group1/M00/03/8E/rAoKNV1A4fOAa67LAAINvajdFbc475.png"/></div>
-                    <p>&nbsp;</p>
-                    <p><strong>故事简介</strong></p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发</p>
-                    <p></p>
-                </div>
-                <div class="passage">
-                    <div><img src="https://image.juooo.com////////group1/M00/03/8E/rAoKNV1A4fOAa67LAAINvajdFbc475.png"/></div>
-                    <p>&nbsp;</p>
-                    <p><strong>故事简介</strong></p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发</p>
-                    <p></p>
-                </div>
-                <div class="passage">
-                    <div><img src="https://image.juooo.com////////group1/M00/03/8E/rAoKNV1A4fOAa67LAAINvajdFbc475.png"/></div>
-                    <p>&nbsp;</p>
-                    <p><strong>故事简介</strong></p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发</p>
-                    <p></p>
-                </div>
-                <div class="passage">
-                    <div><img src="https://image.juooo.com////////group1/M00/03/8E/rAoKNV1A4fOAa67LAAINvajdFbc475.png"/></div>
-                    <p>&nbsp;</p>
-                    <p><strong>故事简介</strong></p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发</p>
-                    <p></p>
-                </div>
-                <div class="passage">
-                    <div><img src="https://image.juooo.com////////group1/M00/03/8E/rAoKNV1A4fOAa67LAAINvajdFbc475.png"/></div>
-                    <p>&nbsp;</p>
-                    <p><strong>故事简介</strong></p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发</p>
-                    <p></p>
-                </div>
-                <div class="passage">
-                    <div><img src="https://image.juooo.com////////group1/M00/03/8E/rAoKNV1A4fOAa67LAAINvajdFbc475.png"/></div>
-                    <p>&nbsp;</p>
-                    <p><strong>故事简介</strong></p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发几个及定位看过来问了疯狂咳嗽饿哦发几个</p>
-                    <p>及定位看过来问了疯狂咳嗽饿哦发</p>
-                    <p></p>
-                </div>
-            </article>
-            <div class="tip">
-            <aside>
-                <h2>温馨提示</h2>
-                <a class="iconfont icon-icongengduo"></a>
-            </aside>
-            <ol>
-                <li><div></div>配送说明</li>
-                <li><div></div>订票说明</li>
-                <li><div></div>确认订单</li>
-                <li><div></div>购票提醒</li>
-            </ol>
-            </div>
-            <div class="other">
-                <h2>相关推荐</h2>
-                <dl>
-                    <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                    </a>
-                    <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                    </a>
-                    <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                    </a>
-                    <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                    </a>
-                </dl>
-            </div>    
-        </section>
-        <footer>
-            <div class="tel">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAb1BMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmbw3/OPAAAAJHRSTlMAH4DvLAySB/Tg05n5rk3opHxiwKCKOhUP4qh0M9jNbli4hSkY6Xp9AAABR0lEQVQ4y52R6ZKCMBAGB8IREg4FEVA8drff/xlXsHZLNAhl/yJDJ1/NjHxInNuzBn22eSzztL7iH+W3c15eABRVllX3r9zt1YCqAxkJagXULs8C0UNaGwH21duCforKNWyfvT3o/UtRw1MxPsFVXrjCaTqmEjbiYAPlpGBIPZfopZjHczA+OPNk8HC8QD6zBLhM74VuMZxkxYZEZkgwf303VkFaur0yBWWbsZGCkcDlBYwUt59hAklk4egSj2CjwQiHHWexeOC7RB88ibNh5wYVyntRQoWRlIMsiXIgFYiWxQhWi6ujVzezfjzDwLv3A++Gga9e4Y0mUqBLcfINqKiRO7EXhOJmB9dYltmDkRU0CeQrvJ8TbGSGPgFI+tsS6hTO4ZyYMWKsAfhqZY4KvdtpRtRFZFlUWTnGLkRXnizQdwBdL5/yC+1CKknvBpjdAAAAAElFTkSuQmCC"/>
-                <span>客服</span>
-            </div>
-            <input type="button" value="立即购买"/>
-        </footer>
+                <input type="button" value="立即购买"/>
+            </footer>            
+        </div>
+
     </div>
 </template>
 <script>
+import Loading from "../../../lib/loading/index.vue"
 import {detailApi} from "@api/classify.js"
 import {detailCutApi} from "@api/classify.js"
 import {detailCityApi} from "@api/classify.js"
-// import {detailCutApi} from "@api/classify.js"
+import {classifyApi} from "@api/classify.js"
 
 export default {
+    name:"Detail",
+    components:{
+        Loading
+    },
     data(){
         return{
-            static_data:"",
-            share_list:"",
-            ticket_list:[],
-            city_name:"",
-            venue_name:"",
-            venue_address:"",
-            city:"",
-            desc:"",
-            discount:""
+            static_data:"",//基本数据
+            share_data:"",//介绍数据
+            share_pic:"", //介绍图片
+            support:"", //支持
+            city_name:"",   //城市名
+            city_id:"",     //城市ID
+            venue_name:"",  //场馆
+            venue_address:"",   //地址
+            city:"",        //演出的城市
+            desc:"",           //入场规则
+            discount:"",    //折扣---------->未获取
+            show_time:"",       //演出时间
+            show_data:"" ,   //推荐演出
+            full_path:"",    //记录哪个路由进入的
+            isshow:"" ,  //是否进入时显示
+            timer:1300
         }
     },
-    created(){
+    created(from){
+        clearTimeout(this.timer);  //清除延迟执行 
+        
+        this.timer = setTimeout(()=>{   //设置延迟执行
+            this.isshow=true;
+        },1000)
         this.getDetailGood(this.$route.params.id);
+        this.getClassifygoods();
     },
     methods:{
         async getDetailGood(goodsId){
             let data =await detailApi(goodsId);
-            // console.log(data.data.share_data.share_desc);
-            this.share_list=data.data.share_data;
-            this.static_data=data.data.static_data;//获取数据
-            this.ticket_list=data.data.vip.discount[0].ticket_list;//获取优惠参数
-            this.discount=this.ticket_list[0].discount;//获取折扣
-            // console.log(this.ticket_list);
+            // console.log(data);
+            if(data.data.item_list.length){
+                this.show_time=data.data.item_list[0].project_time;
+            }
+            
+            // this.share_list=data.data.share_data;
+            this.static_data=data.data.static_data;//获取基本数据
+            this.share_data=data.data.share_data.share_desc;//获取介绍数据
+            this.share_pic=data.data.share_data.share_pic;//获取介绍数据
+            this.support=data.data.static_data.support.list;//获取支持数据
+            // console.log(this.support);
 
             let show_id=this.static_data.show_id;   //演出ID
             let venue_id=this.static_data.venue.venue_id;   //地点ID
 
             this.city_name=this.static_data.city.city_name; //城市名
+            this.city_id=this.static_data.city.city_id; //城市id
             this.venue_name=this.static_data.venue.venue_name;  //演出地点名
             this.venue_address=this.static_data.venue.venue_address;     //演出地址
             this.desc=this.static_data.tips.desc;
 
-            // console.log(show_id,venue_id);
-            // this.getTickets(ticket);
-            this.getDetailCut(this.ticket_list[0].ticke_id);
+            // this.getDetailCut(this.ticket_list[0].ticke_id);
             this.getDetailCity(show_id,venue_id);
         },
-        async getDetailCut(id){//
+        async getDetailCut(id){//获取优惠
             let data = await detailCutApi(id);
-            // console.log(data);
         },
-        async getDetailCity(show_id,venue_id){
+        async getDetailCity(show_id,venue_id){//获取城市
             let data =await detailCityApi(show_id,venue_id)
             this.city=data.data.tour_list;
-        }
+        },
+        async getClassifygoods(){
+            let data= await classifyApi(this.static_data.cate_parent_id,this.city_id);
+            this.show_data=data.data.list.slice(2);
+        },
+        
     }
 }
 </script>
@@ -434,19 +357,18 @@ export default {
     ol li{font-size: .12rem;color: #999;list-style: none;display: flex;align-items: center;}
     ol li div{height: .03rem;width: .03rem;background: #999;margin-right: .1rem;border-radius: 50%;}
 
-    .other{background: white;height: 5.362rem;margin-top: .1rem;padding: .1877rem .128rem .128rem;}
-    .other dl a{font-weight: normal;margin-top: .1rem;display: block;}
-    .other dl dd{display: flex;}
+    .other{background: white;margin-top: .1rem;padding: .1877rem .128rem .128rem;}
+    .other dl dd{display: flex;font-weight: normal;margin-top: .2rem;}
     .other dl dd div{height: 1.2288rem;width: .8959rem;}
     .other dl dd div img{height: 100%;}
     .other hgroup{margin-left: .1rem;display: flex;justify-content: space-around;flex-direction: column;}
     .other hgroup h5{font-size: .14rem;}
     .other hgroup h6{height: .3925rem;font-size: .14rem;}
-    .other hgroup p{font-size: .14rem;color: #232323;line-height: .19rem;}
+    .other hgroup p{overflow:hidden;font-size: .14rem;color: #232323;line-height: .19rem;height: .38rem;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2;}
     .other hgroup span{font-size: .12rem;color: #666;}
     .other hgroup strong{color: #ff6743;font-size: .14rem;}
 
-    #detailfooter{
+    #detail footer{
         width: 100%;
         height: .4692rem;
         background: white;

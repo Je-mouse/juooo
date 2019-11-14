@@ -2,85 +2,29 @@
     <div id="discount">
         <div>
             <Header title="专享折扣"/>
-            <Nav font="iconfont icon-shaixuan" family="筛选"/>
+            <Nav font="iconfont icon-shaixuan" family="筛选"  @handle="getCheckIndex"/>
         </div>
         <section>
             <ul>
-                <li>
+                <router-link v-for="(item,key) in count_list" :key="key" tag="li" :to="'/detail/'+item.schedular_id">
                     <div class="content">
-                        <a style="height: 1.18rem;"><img src="https://image.juooo.com/group1/M00/02/FE/rAoKmV1fNxaAPbsCAAB_-x8YGi8341.jpg"/></a>
+                        <a style="height: 1.18rem;"><img :src="item.pic"/></a>
                         <div class="right">
-                            <h4>11/13-11/17</h4>
-                            <h4>音乐剧史诗巨作《贝隆夫人》Evita-杭州站</h4>
-                            <p>杭州<i>|</i>杭州大剧院（歌剧院）</p>
-                            <b>￥180<span>起</span></b>
+                            <h4>{{item.date}}</h4>
+                            <h4>{{item.schedular_name}}</h4>
+                            <p>{{item.city_name}}<i>|</i>{{item.venue_name}}</p>
+                            <b>￥{{item.min_price}}<span>起</span></b>
                         </div>
                     </div>
                     <div class="footer">
-                        <span><i>11/17 19:30</i>结束</span>
-                        <span><i>9.5</i>折起</span>
+                        <span><i>{{item.end_time}}</i>结束</span>
+                        <span><i>{{item.min_discount}}</i>折起</span>
                     </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <a style="height: 1.18rem;"><img src="https://image.juooo.com/group1/M00/02/FE/rAoKmV1fNxaAPbsCAAB_-x8YGi8341.jpg"/></a>
-                        <div class="right">
-                            <h4>11/13-11/17</h4>
-                            <h4>音乐剧史诗巨作《贝隆夫人》Evita-杭州站</h4>
-                            <p>杭州<i>|</i>杭州大剧院（歌剧院）</p>
-                            <b>￥180<span>起</span></b>
-                        </div>
-                    </div>
-                    <div class="footer">
-                        <span><i>11/17 19:30</i>结束</span>
-                        <span><i>9.5</i>折起</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <a style="height: 1.18rem;"><img src="https://image.juooo.com/group1/M00/02/FE/rAoKmV1fNxaAPbsCAAB_-x8YGi8341.jpg"/></a>
-                        <div class="right">
-                            <h4>11/13-11/17</h4>
-                            <h4>音乐剧史诗巨作《贝隆夫人》Evita-杭州站</h4>
-                            <p>杭州<i>|</i>杭州大剧院（歌剧院）</p>
-                            <b>￥180<span>起</span></b>
-                        </div>
-                    </div>
-                    <div class="footer">
-                        <span><i>11/17 19:30</i>结束</span>
-                        <span><i>9.5</i>折起</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <a style="height: 1.18rem;"><img src="https://image.juooo.com/group1/M00/02/FE/rAoKmV1fNxaAPbsCAAB_-x8YGi8341.jpg"/></a>
-                        <div class="right">
-                            <h4>11/13-11/17</h4>
-                            <h4>音乐剧史诗巨作《贝隆夫人》Evita-杭州站</h4>
-                            <p>杭州<i>|</i>杭州大剧院（歌剧院）</p>
-                            <b>￥180<span>起</span></b>
-                        </div>
-                    </div>
-                    <div class="footer">
-                        <span><i>11/17 19:30</i>结束</span>
-                        <span><i>9.5</i>折起</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <a style="height: 1.18rem;"><img src="https://image.juooo.com/group1/M00/02/FE/rAoKmV1fNxaAPbsCAAB_-x8YGi8341.jpg"/></a>
-                        <div class="right">
-                            <h4>11/13-11/17</h4>
-                            <h4>音乐剧史诗巨作《贝隆夫人》Evita-杭州站</h4>
-                            <p>杭州<i>|</i>杭州大剧院（歌剧院）</p>
-                            <b>￥180<span>起</span></b>
-                        </div>
-                    </div>
-                    <div class="footer">
-                        <span><i>11/17 19:30</i>结束</span>
-                        <span><i>9.5</i>折起</span>
-                    </div>
-                </li>
+                </router-link>
+                <div :class="flag!=0?'not_show':'nothing'">
+                    <img src="https://m.juooo.com/static/img/schedule_empty.82d078c.png"/>
+                    <span>暂无演出项目</span>
+                </div>
             </ul>
         </section>
     </div>
@@ -91,16 +35,28 @@ export default {
     name:"Discount",
     data(){
         return{
-
+            count_list:"",
+            cate_id:0,
+            flag:""
         }
     },
     created(){
-        this.getDiscount();
+        this.getDiscount(this.cate_id);
     },
     methods:{
-        async getDiscount(){
-            let data= await discountApi()
-            console.log(data);
+        async getDiscount(cate_id){
+            let data= await discountApi(cate_id);
+            this.count_list=data.data.list;
+            // console.log(this.count_list);
+             this.flag=this.count_list.length;
+           console.log(this.flag);
+           
+        },
+        getCheckIndex(index){
+           this.cate_id=index;
+          
+           this.getDiscount(this.cate_id);
+           
         }
     }
 }
@@ -132,6 +88,7 @@ nav a{
         background: white;
         padding-top: .1rem;
     }
+    .none{display: none;}
    #discount section .content{
         display: flex;
         height: 1.3rem;
@@ -146,6 +103,15 @@ nav a{
    #discount section .content h4:nth-of-type(1){
         font-size: .12rem;
         margin-bottom: .1rem;
+    }
+    #discount section .content h4:nth-of-type(2){
+        height: .38rem;
+        width: 2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
    #discount section .content img{
         width: .89rem;
@@ -191,4 +157,7 @@ nav a{
         display: inline-block;
         line-height: .12rem;
     }
+    #discount .not_show{display: none;}
+    #discount .nothing{font-size: .12rem;color: #999;display: flex;justify-content: center; align-items: center;flex-direction: column;}
+    #discount .nothing img{height: .8rem}
 </style>

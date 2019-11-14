@@ -3,187 +3,25 @@
         <Header title="剧院" icon1="1" icon2="1"/>
         <section>
             <ul>
-                <li>
+                <li v-for="(item,key) in list" :key="key">
                     <div class="head">
                         <div class="left">
-                            <img src="https://image.juooo.com//group1/M00/01/D2/rAoKmVwknq2AQjJ3AABZC2s-o9o803.jpg"/>
+                            <img :src="item.pic"/>
                             <div>
-                                <h2>南山文体演出</h2>
-                                <span>132场在售演出</span>
+                                <h2>{{item.name}}</h2>
+                                <span>{{item.showList.length}}场在售演出</span>
                             </div>
                         </div>
                         <a href="#" class="iconfont icon-icongengduo"></a>
                     </div> 
                     <div class="content">
                         <dl>
-                            <dd>
+                            <dd v-for="(n,i) in item.showList" :key="i">
                                 <div class="time">
-                                    <p>11月09日</p>
+                                    <p>{{n.show_time}}</p>
                                     <span></span>
                                 </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                        </dl>
-                    </div>
-                </li>
-                <li>
-                    <div class="head">
-                        <div class="left">
-                            <img src="https://image.juooo.com//group1/M00/01/D2/rAoKmVwknq2AQjJ3AABZC2s-o9o803.jpg"/>
-                            <div>
-                                <h2>南山文体演出</h2>
-                                <span>132场在售演出</span>
-                            </div>
-                        </div>
-                        <a href="#" class="iconfont icon-icongengduo"></a>
-                    </div> 
-                    <div class="content">
-                        <dl>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                        </dl>
-                    </div>
-                </li>
-                <li>
-                    <div class="head">
-                        <div class="left">
-                            <img src="https://image.juooo.com//group1/M00/01/D2/rAoKmVwknq2AQjJ3AABZC2s-o9o803.jpg"/>
-                            <div>
-                                <h2>南山文体演出</h2>
-                                <span>132场在售演出</span>
-                            </div>
-                        </div>
-                        <a href="#" class="iconfont icon-icongengduo"></a>
-                    </div> 
-                    <div class="content">
-                        <dl>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                        </dl>
-                    </div>
-                </li>
-                <li>
-                    <div class="head">
-                        <div class="left">
-                            <img src="https://image.juooo.com//group1/M00/01/D2/rAoKmVwknq2AQjJ3AABZC2s-o9o803.jpg"/>
-                            <div>
-                                <h2>南山文体演出</h2>
-                                <span>132场在售演出</span>
-                            </div>
-                        </div>
-                        <a href="#" class="iconfont icon-icongengduo"></a>
-                    </div> 
-                    <div class="content">
-                        <dl>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                        </dl>
-                    </div>
-                </li>
-                <li>
-                    <div class="head">
-                        <div class="left">
-                            <img src="https://image.juooo.com//group1/M00/01/D2/rAoKmVwknq2AQjJ3AABZC2s-o9o803.jpg"/>
-                            <div>
-                                <h2>南山文体演出</h2>
-                                <span>132场在售演出</span>
-                            </div>
-                        </div>
-                        <a href="#" class="iconfont icon-icongengduo"></a>
-                    </div> 
-                    <div class="content">
-                        <dl>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
-                            </dd>
-                            <dd>
-                                <div class="time">
-                                    <p>11月09日</p>
-                                    <span></span>
-                                </div>
-                                <a><img src="https://image.juooo.com//group1/M00/02/80/rAoKmVzOX2mAf10OAAL_Eb_j7BM529.jpg"/></a>
+                                <a><img :src="n.pic"/></a>
                             </dd>
                         </dl>
                     </div>
@@ -193,8 +31,22 @@
     </div>
 </template>
 <script>
+import {theaterApi} from "@api/classify"
 export default {
-    
+    data(){
+        return{
+            list:""
+        }
+    },
+    created(){
+        this.getTheater();
+    },
+    methods:{
+        async getTheater(){
+            let data = await theaterApi();
+            this.list=data.data.theatre_list;
+        }
+    }
 }
 </script>
 <style>
@@ -248,10 +100,10 @@ export default {
         overflow: hidden;
     }
     .content dl{
-            display: flex;
+            display: flex;overflow-x: scroll;
     }
     .content dd{
-        height: 1.6422rem;
+        height: 2rem;
         width: .9727rem;
         padding-bottom: .1rem;
     }

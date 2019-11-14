@@ -51,7 +51,7 @@ export default {
                 case 7:this.id=86;break;
             } 
             this.flag=index;
-            console.log(this.flag);
+            // console.log(this.flag);
             this.$emit("handle",this.id);
         },
     }

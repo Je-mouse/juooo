@@ -1,8 +1,8 @@
 <template>
     <div id="header">
-        <a class="iconfont icon-iconfanhui"  v-if="icon1?false:true"></a>
+        <v-touch tag="a" class="iconfont icon-iconfanhui"  v-if="icon1?false:true"  @tap="handleBack()"></v-touch>
             <h1>{{title}}</h1>
-        <a  class="iconfont icon-icongengduo" v-if="icon2?false:true"></a>
+        <a class="iconfont icon-icongengduo" v-if="icon2?false:true"></a>
         <slot name="iconfont"></slot>
     </div >
 </template>
@@ -21,6 +21,11 @@ export default {
         icon2:{
             type:String,
             default:""
+        }
+   },
+   methods:{
+       handleBack(){
+            this.$router.go(-1);
         }
    }
   

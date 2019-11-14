@@ -29,7 +29,7 @@
         
         <hgroup v-show="isShow1">
             <ul>
-                <li v-for="(item,key) in goods" :key="key">
+                <router-link v-for="(item,key) in goods" :key="key" tag="li" :to="'/detail/'+item.schedular_id">
                     <a href="#"><img :src="'https://image.juooo.com/'+item.pic"/></a>
                     <div class="right">
                         <a href="#">{{item.schedular_name}}</a>
@@ -38,13 +38,13 @@
                         <p>场馆：<span>{{item.venue_time}}</span></p>
                         <h6><b>{{item.scores}}</b>积分</h6><del>￥{{item.ticket_price}}</del>
                     </div>
-                </li>
+                </router-link>
             </ul>
         </hgroup>
     </div>
 </template>
 <script>
-import {creditApi} from "@api/credit"
+import {creditApi} from "@api/classify"
 export default {
     name:"Credit",
     data(){
@@ -64,6 +64,7 @@ export default {
         async getGoods(params){
             console.log(params)
             let data= await creditApi(params);
+            console.log(data);
             this.goods=data.data.list;
         },
         handleShowCity(){

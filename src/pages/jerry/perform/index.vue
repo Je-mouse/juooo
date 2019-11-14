@@ -35,62 +35,6 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com/group1/M00/03/26/rAoKNVzIFqmAcoswAABmDtTNJyI871.jpg"/></a>
-                    <div id="right">
-                        <a  href="#">
-                            <h5>百老汇摇滚音乐剧《吉屋出租RENT》中文版</h5>
-                        </a>
-                        <h6><i>2019.11.30</i>-<i>2020.01.18</i></h6>
-                        <div id="btn">
-                            <a>深圳</a><a>广州</a>
-                            <a>上海</a><a>北京</a>
-                            <a>杭州</a><a>查看更多</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com/group1/M00/03/26/rAoKNVzIFqmAcoswAABmDtTNJyI871.jpg"/></a>
-                    <div id="right">
-                        <a  href="#">
-                            <h5>百老汇摇滚音乐剧《吉屋出租RENT》中文版</h5>
-                        </a>
-                        <h6><i>2019.11.30</i>-<i>2020.01.18</i></h6>
-                        <div id="btn">
-                            <a>深圳</a><a>广州</a>
-                            <a>上海</a><a>北京</a>
-                            <a>杭州</a><a>查看更多</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com/group1/M00/03/26/rAoKNVzIFqmAcoswAABmDtTNJyI871.jpg"/></a>
-                    <div id="right">
-                        <a  href="#">
-                            <h5>百老汇摇滚音乐剧《吉屋出租RENT》中文版</h5>
-                        </a>
-                        <h6><i>2019.11.30</i>-<i>2020.01.18</i></h6>
-                        <div id="btn">
-                            <a>深圳</a><a>广州</a>
-                            <a>上海</a><a>北京</a>
-                            <a>杭州</a><a>查看更多</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com/group1/M00/03/26/rAoKNVzIFqmAcoswAABmDtTNJyI871.jpg"/></a>
-                    <div id="right">
-                        <a  href="#">
-                            <h5>百老汇摇滚音乐剧《吉屋出租RENT》中文版</h5>
-                        </a>
-                        <h6><i>2019.11.30</i>-<i>2020.01.18</i></h6>
-                        <div id="btn">
-                            <a>深圳</a><a>广州</a>
-                            <a>上海</a><a>北京</a>
-                            <a>杭州</a><a>查看更多</a>
-                        </div>
-                    </div>
-                </li>
             </ol>
         </section> 
         <!-- </div> -->
@@ -98,8 +42,17 @@
     </div>
 </template>
 <script>
+import {performApi} from "@api/classify"
 export default {
-    
+    created(){
+        this.getPerform();
+    },
+    methods:{
+        async getPerform(){
+            let data =await performApi();
+            console.log(data);
+        }
+    }
 }
 </script>
 <style>
