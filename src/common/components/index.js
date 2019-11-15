@@ -1,12 +1,11 @@
 import Vue from "vue";
-import Header from "./header_home";
-// import BScroll from "./bscroll"
-let componentMap = [
+import Header from "./header";
+import Nav from "./nav";
+
+let componentMap=[
     Header,
+    Nav
 ]
-
-
 componentMap.forEach((item)=>{
-    // console.log(item)
     Vue.component(item.name,item)
 })
