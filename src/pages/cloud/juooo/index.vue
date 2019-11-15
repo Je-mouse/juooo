@@ -2,9 +2,9 @@
   <div>
     <div class="header">
       <div class="top">
-        <div class="head-address">
+        <div class="head-address" @click="handleToCity()">
           <i class="iconfont">&#xe600;</i>
-          <span>全国</span>
+          <span>{{this.$store.state.city.name}}</span>
         </div>
         <input type="text" placeholder="搜索热门演出" @click="handleSearch()"/>
         <div class="head-space" v-for="(img,imgpic) in top_icon" :key="imgpic">
@@ -38,37 +38,8 @@
             </li>
           </ul>
         </div>
-        <div class="card">
-          <img
-            :src="advert"
-            alt
-          />
-        </div>
-        <div class="operation">
-          <ol>
-            <li v-for="(ollist,bu) in ollist" :key="bu">
-              <h3>{{ollist.name}}</h3>
-              <div v-html="ollist.describe"></div>
-              <img
-                :src="ollist.pic"
-                alt
-              />
-            </li>
-          </ol>
-          <ul>
-            <li v-for="(ullist,ji) in ullist" :key="ji">
-              <h3>{{ullist.name}}</h3>
-              <div v-html="ullist.describe"></div>
-              <div>
-                <img
-                  :src="ullist.pic"
-                  alt
-                />
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
+
       <div class="section">
         <h3>
           热门演出
@@ -318,7 +289,7 @@ export default {
       this.classify_list = data.data.classify_list;
       this.slide_list = data.data.slide_list;
       // console.log(this.slide_list)
-      console.log(this.classify_list)
+      //console.log(this.classify_list)
       this.operation_list = data.data.operation_list;
       for(var i=0;i<this.operation_list.length;i++){
         this.ollist = this.operation_list.slice(0,2);
@@ -357,6 +328,9 @@ export default {
     },
     handleSearch(){
       this.$router.push("/search")
+    },
+    handleToCity(){
+      this.$router.push("/city")
     }
   },
   mounted() {
@@ -402,29 +376,12 @@ li{list-style:none;}
 
 
 .middle{width:100%;position:absolute;left:0;top:0;padding-top:1.67rem;padding-bottom:0.42rem;background:#fff;}
-.main{width:100%;height:4.58rem;box-sizing: border-box;padding:.2rem .15rem;}
+.main{width:100%;box-sizing: border-box;padding:.2rem .15rem;}
 .main .label{margin-bottom:.2rem;}
-.main .label ul{width:100%;height:.753rem;display:flex;justify-content: space-around;align-items: center;}
+.main .label ul{width:100%;display:flex;justify-content: space-around;align-items: center;flex-wrap: wrap;}
 .main .label ul li{width:.51rem;height:.753rem;text-align: center;}
+.main .label ul li p{font-size:.11rem;}
 .main .label ul li img{width:100%;}
-
-.main .card{width:100%;height:1rem;margin-bottom:.1rem;border-radius: .5rem;overflow: hidden;}
-.main .card img{width:100%;height:100%;}
-
-.main .operation{width:100%;height:2.021rem;background:#f5f5f5;border: .02rem solid #f5f5f5;}
-.main .operation ol{display: flex;justify-content: space-between;width:100%;height:.9rem;}
-.main .operation ol li{width:1.42rem;height:.9rem;background:#fff;position:relative;}
-.main .operation ol li h3{width:.9rem;height:0.125rem;font-size:.165rem;line-height:.65rem;box-sizing: border-box;margin-left:.15rem;}
-.main .operation ol li p{width:.9rem;height:.4rem;font-size:.1rem;line-height:.9rem;margin-left:.15rem;}
-.main .operation ol li p span{color:#f00;}
-.main .operation ol li img{width:0.4rem;display:block;margin-left:.97rem;position:absolute;bottom:.24rem;}
-.main .operation ul{display: flex;justify-content: space-between;width:100%;height:1.065rem;margin-top:.06rem;}
-.main .operation ul li{width:.944rem;height:1.06rem;background:#fff;display: flex;justify-content: space-around;align-items:center; flex-direction: column;}
-.main .operation ul li h3{font-size:.13rem;}
-.main .operation ul li p{font-size:.1rem;}
-.main .operation ul li p span{color:red;}
-.main .operation ul li div img{width:.384rem;}
-
 
 
 .section{width:100%;height:2.717rem;box-sizing: border-box;padding:.2rem 0 .32rem .15rem;overflow: hidden;font-size:.23rem;}

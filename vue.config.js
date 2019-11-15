@@ -17,6 +17,10 @@ module.exports={
             "/Show":{
                 target:"https://api.juooo.com",
                 changeOrigin:true
+            },
+            "/city":{
+                target:"https://api.juooo.com",
+                changeOrigin:true
             }
 
         }

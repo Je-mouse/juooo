@@ -2,7 +2,7 @@
   <div>
       <header>
         <div class="inner">
-            <input type="text" placeholder="搜索热门演出" :value="inputValue" @input="handledata($event)"/>
+            <input type="text"  placeholder="搜索热门演出" :value="tuijian" @input="handledata($event)" ref="cancel"/>
             <div class="search"></div> 
             <v-touch  class="cancel" @tap="handleValue()"></v-touch>
         </div>  
@@ -18,7 +18,7 @@
         </div>
     </div>
     
-    <div class="searchListCall"  v-if="searchList?true:false">
+    <div class="searchListCall"  v-if="flag">
         <div class="searchListCall_data" v-for="(searchList,ren) in searchList" :key="ren">
             <div class="imginfo">
                 <img :src="searchList.pic">
@@ -36,13 +36,16 @@
 
 <script>
 import {SearchApi,SearchDataApi} from "@api/show";
+import {throttle} from "@utils/cloud"
 export default {
     name:"Search",
     data(){
         return{
+            flag:false,
             hotShow:[],
             inputValue:"",
-            searchList:[]
+            searchList:[],
+            tuijian:""
         }
     },
     created(){
@@ -57,18 +60,29 @@ export default {
         handleSearchBack(){
             this.$router.back()
         },
-        handleSearchData(index){
-            this.inputValue= this.hotShow[index];
+        async handleSearchData(index){
+            this.tuijian = this.hotShow[index];
+            let data = await SearchDataApi(this.tuijian);
+            this.searchList = data.data.list;
+            this.flag = true ;
         },
         handleValue(){
-            this.inputValue = "";
+            this.$refs.cancel.value = "";
+            this.flag = false;
         },
         async handledata(e){
-            e=e || window.event
-           let data = await SearchDataApi(e.target.value);
+            throttle(async ()=>{
+                let data = await SearchDataApi(e.target.value);
+                this.searchList = data.data.list;
+            })
             //console.log(data,111);
-            this.searchList = data.data.list;
-            console.log(this.searchList)
+        
+            if(e.target.value.length == ! 0){
+                this.flag = true;
+            }else{
+                this.flag = false;
+            }
+            //console.log(this.searchList)
         }
     }
 }

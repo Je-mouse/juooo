@@ -91,6 +91,11 @@ const router = new VueRouter({
       meta:{
         requiredAuth:false  //合并时改成true
       },
+    },
+    {
+      path:"/city",
+      component:_=>import("@pages/cloud/city"),
+      name:"city"
     }
   ]
 })
