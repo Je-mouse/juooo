@@ -90,9 +90,9 @@ export default {
 </script>
 <style>
      /* 积分 */
-    nav{height: .6rem;line-height: 1rem;color: #b2b2b2;background: #fff;text-align: center;z-index: 499;display: flex;justify-content: space-between;align-items: center;}
-    nav span{ width: .67rem;display: inline-block;}
-    nav strong{
+    .credit nav{height: .6rem;line-height: 1rem;color: #b2b2b2;background: #fff;text-align: center;z-index: 499;display: flex;justify-content: space-between;align-items: center;}
+    .credit nav span{ width: .67rem;display: inline-block;}
+    .credit nav strong{
         background: url(https://m.juooo.com/public/basic/Home/app/app-juooo4.2/images/icon-adr.png) no-repeat left center;
         width: .1rem;
         padding-left: .15rem;
@@ -100,10 +100,10 @@ export default {
         font-size: .18rem;
         color: #424242;
     }
-    nav .score{ font-size: .11rem; color: #b2b2b2;}
+    .credit nav .score{ font-size: .11rem; color: #b2b2b2;}
     /* 城市选择*/ 
-   aside{height: .4rem;z-index: 100;}
-    figure{
+    .credit aside{height: .4rem;z-index: 100;}
+    .credit figure{
         border-top: .01rem solid #e7e7e7;
         height: .35rem;
         display: flex;
@@ -114,15 +114,15 @@ export default {
         justify-content: space-around;
         color: #666;
     }
-    figure p{ font-size: .13rem;}
-    .city{
+    .credit figure p{ font-size: .13rem;}
+    .credit .city{
         font-size: .14rem;
         color:#999;
     }
-    .city p{padding: 0 .1rem;border-bottom: .01rem solid #efefef;line-height: .5rem;font-size: .12rem;
+    .credit .city p{padding: 0 .1rem;border-bottom: .01rem solid #efefef;line-height: .5rem;font-size: .12rem;
     color: #666;}
     /*商品*/
-    hgroup{
+    .credit hgroup{
         padding-top: 0.05rem;
         position: absolute;
         left: 0;
@@ -134,37 +134,37 @@ export default {
         overflow: auto;
         background: #f0f0f0;
     }
-    hgroup ul{ background: #fff; padding: .1rem;}
-    hgroup ul li{
+    .credit hgroup ul{ background: #fff; padding: .1rem;}
+    .credit hgroup ul li{
         border-bottom: .01rem solid #eee;
         padding-bottom: .1rem;
         display: flex;
         font-size: .14rem;
         margin-top: .1rem;
     }
-    hgroup ul li img{width: .75rem; }
-    hgroup .right{margin-left: .1rem; }
-    hgroup .right a{font-weight: normal;color: #333;display: block;margin-bottom: .05rem;}
-    hgroup .right p{font-size: .11rem;color: #666;}
-    hgroup .right p:nth-of-type(3){margin-bottom: .05rem; }
-    hgroup .right h6{
+    .credit hgroup ul li img{width: .75rem; }
+    .credit hgroup .right{margin-left: .1rem; }
+    .credit hgroup .right a{font-weight: normal;color: #333;display: block;margin-bottom: .05rem;}
+    .credit hgroup .right p{font-size: .11rem;color: #666;}
+    .credit hgroup .right p:nth-of-type(3){margin-bottom: .05rem; }
+    .credit hgroup .right h6{
         display: inline-block;
         color: #ff7919;
         font-size: .1rem;
         transform: scale(0.8);
         font-weight: normal;
     }
-    hgroup .right h6 b{
+    .credit hgroup .right h6 b{
         font-weight: normal;
         font-size: .18rem;
         transform: scale(0.9);
     }
-    hgroup .right del{
+    .credit hgroup .right del{
         font-size: .11rem;
         color:  #ccc;
         transform: scale(0.8);
         display: inline-block;
         margin-left: -0.1rem;
     } 
-    .active{color: red}
+    .credit .active{color: red}
 </style>

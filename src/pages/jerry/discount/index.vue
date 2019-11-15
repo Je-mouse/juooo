@@ -31,13 +31,16 @@
 </template>
 <script>
 import {discountApi} from "@api/classify"
+
 export default {
     name:"Discount",
     data(){
         return{
             count_list:"",
             cate_id:0,
-            flag:""
+            flag:"",
+            // timer:1300,
+            // isshow:""   //是否进入时显示
         }
     },
     created(){
@@ -62,7 +65,7 @@ export default {
 }
 </script>
 <style>
-nav{align-items: flex-start}
+nav{align-items: flex-start;height: .4rem;}
 nav a{
         background: none;
         font-size: .14rem;

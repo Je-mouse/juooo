@@ -1,5 +1,6 @@
 <template>
     <div class="classify">
+        <!-- <Loading v-if="isshow==true?'':'false'"/> -->
         <div id="all">
             <Header title="演出"/>
             <Nav @handle="getCheckIndex"/>
@@ -25,16 +26,26 @@
 
 <script>
 import {classifyApi} from "@api/classify"
-
+// import Loading from "@lib/loading/index.vue"
 export default {
-    name:"Classify",
+    name:"classify",
+    // components:{
+    //     Loading
+    // },
     data(){
         return{
             id:35,
-            data:[]
+            data:[],
+            timer:1300,
+            isshow:"" ,  //是否进入时显示
         }
     },
     created(){
+        // clearTimeout(this.timer);  //清除延迟执行 
+
+        // this.timer = setTimeout(()=>{   //设置延迟执行
+        //     this.isshow=true;
+        // },300)
         this.getGoodsList(this.id);
     },
     methods:{
@@ -54,9 +65,9 @@ export default {
 <style>
        #all{background: white;z-index: 999; height: .73rem;position: absolute;width: 100%}
     /* 数据渲染 */
-        section{ position: absolute; left: 0;right: 0;top: 0; bottom: 0;overflow: auto;padding-top: .71rem;}
-        section ol{display: flex;padding: .07rem;flex-direction: column;}
-        section ol li{ list-style: none;display: flex;font-size: .14rem; color: #666; padding: 0.05rem 0;}
+        .classify section{ position: absolute; left: 0;right: 0;top: 0; bottom: 0;overflow: auto;padding-top: .71rem;}
+        .classify section ol{display: flex;padding: .07rem;flex-direction: column;}
+        .classify section ol li{ list-style: none;display: flex;font-size: .14rem; color: #666; padding: 0.05rem 0;}
        
         ol li img{ width: 0.9rem;border-radius: .08rem;border: .01rem solid #ebebeb;position: relative;overflow: hidden;}
 

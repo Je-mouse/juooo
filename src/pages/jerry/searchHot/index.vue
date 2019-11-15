@@ -6,83 +6,44 @@
                 <div class="search"></div> 
                 <div class="cancel"></div>
             </div>  
-            <a class="out">取消</a> 
+            <router-link class="out" tag="a" to="/perform">取消</router-link> 
         </header>
         <div class="other">
             <dl>
-                <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                </a>
-                <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                </a>
-                <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                </a>
-                <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                </a>
-                <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                </a>
-                <a href="">
-                    <dd>
-                        <div><img src="https://image.juooo.com/group1/M00/03/2A/rAoKmV2lRjOAIxl9AAC1-ngH3Zg321.jpg"/></div>
-                        <hgroup>
-                            <h5> 12/25-12/29</h5>
-                            <h6><p>音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧音乐剧</p></h6>
-                            <span>上海<i>|</i>上海大剧院-别克中剧场</span>
-                            <span><strong>￥80</strong>起</span>
-                        </hgroup> 
-                    </dd>
-                </a>
+                <dd v-for="(item,i) in list" :key="i">
+                    <router-link :to="'/detail/'+item.schedular_id" tag="div"><img :src="item.pic"/></router-link>
+                    <hgroup>
+                        <h5>{{item.show_time_top}}</h5>
+                        <h6><p v-html="item.name"></p></h6>
+                        <span>{{item.city_name}}<i>|</i>{{item.venue_name}}</span>
+                        <span><strong>￥{{item.min_price}}</strong>起</span>
+                    </hgroup> 
+                </dd>
             </dl>
-        </div>    
+        </div> 
+        <router-view></router-view>   
     </div>
 </template>
 <script>
+import {hotSearchApi} from "@api/classify"
 export default {
-    
+    name:"searchHot",
+    data(){
+        return{
+            list:""
+        }
+    },
+    created(){
+        let params=this.$route.params;
+        this.getSearchList(params);
+    },
+    methods:{
+        async getSearchList(params){
+            let data= await hotSearchApi(params);
+            this.list=data.data.list;
+            console.log(this.list);
+        }
+    },
 }
 </script>
 <style>
@@ -136,14 +97,29 @@ export default {
     header .out{font-size: .12rem;color: #666;}
 
     .other{background: white;padding: 0 .128rem;padding-top: .37rem;}
-    .other dl a{font-weight: normal;margin-top: .1rem;display: block;}
-    .other dl dd{display: flex;}
+    .other dl{font-weight: normal;margin-top: .1rem;display: block;}
+    .other dl dd{display: flex;margin-bottom: .2rem}
     .other dl dd div{height: 1.2288rem;width: .8959rem;}
     .other dl dd div img{height: 100%;}
     .other hgroup{margin-left: .1rem;display: flex;justify-content: space-around;flex-direction: column;}
-    .other hgroup h5{font-size: .14rem;}
+    .other hgroup h5{font-size: .12rem;}
     .other hgroup h6{height: .3925rem;font-size: .14rem;}
-    .other hgroup p{font-size: .14rem;color: #232323;line-height: .19rem;}
+    .other hgroup p{
+        font-size: .14rem;
+        color: #232323;
+        line-height: .19rem;
+        height: .38rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+    }
+    .other hgroup span i{font-style: normal;margin: 0 .1rem;}
     .other hgroup span{font-size: .12rem;color: #666;}
     .other hgroup strong{color: #ff6743;font-size: .14rem;}
+    .other hgroup h6 .c_ff6 {
+        color: #ff6743!important;
+        font-size: .14rem;
+    }
 </style>

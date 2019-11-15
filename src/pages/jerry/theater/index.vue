@@ -35,7 +35,7 @@ import {theaterApi} from "@api/classify"
 export default {
     data(){
         return{
-            list:""
+            list:"",
         }
     },
     created(){
@@ -45,6 +45,7 @@ export default {
         async getTheater(){
             let data = await theaterApi();
             this.list=data.data.theatre_list;
+            console.log(data.data.theatre_list);
         }
     }
 }

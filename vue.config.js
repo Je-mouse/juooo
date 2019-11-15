@@ -30,6 +30,7 @@ module.exports={
                 target:"https://api.juooo.com",
                 changeOrigin:true
             }
+            
         }
     },
     configureWebpack:{

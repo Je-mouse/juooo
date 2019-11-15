@@ -1,23 +1,19 @@
-import vue from "vue"
-// import loadingView from "./index.vue";
-class JSLoding{
+import loadingView from "./index.vue";
+import Vue from "vue"
+
+class JSLoading {
     constructor(){
-        let LoadingFn=vue.extend(loadingView)
-        new LoadingFn({	//相当于new Vue
+        let LoadingFn=Vue.extend(loadingView)
+        this.loadingVm=new LoadingFn({	//相当于new Vue
             el:document.createElement("div")
         })
     }
+    static type = "class";
 	loadingMount(){
         document.body.appendChild(this.loadingVm.$mount().$el)
     }
 	loadingDestroy(){
-	    document.body.appendChild(this.loadingVm.$mount().$el)
+	    document.body.removeChild(this.loadingVm.$mount().$el)
     }
 }
-let mount=new JSLoding();
-let loadingMount=mount.loadingMount();
-let loadingDestroy=mount.loadingDestroy();
-export default{
-    loadingMount,
-    loadingDestroy
-}
+export default new JSLoading();

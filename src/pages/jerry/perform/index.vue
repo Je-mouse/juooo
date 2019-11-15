@@ -1,62 +1,65 @@
 <template>
     <div id="perform">
         <Header title="巡回演出"/>
-        <!-- <div id="perform_body"> -->
            <section>
             <ol>
-                <li>
-                    <a class="imag" href="#">
-                        <img src="https://image.juooo.com/group1/M00/03/26/rAoKNVzIFqmAcoswAABmDtTNJyI871.jpg"/>
-                        <i></i>
-                    </a>
+                <li  v-for="(item,key) in datalist" :key="key">
+                    <router-link class="imag" tag="a" :to="item.pc_url=='sid'?'/before/'+item.show_id:'/searchHot/k='+name[key]">
+                        <img :src="item.pic"/>
+                    </router-link>
                     <div id="right">
                         <a  href="#">
-                            <h5>百老汇摇滚音乐剧《吉屋出租RENT》中文版</h5>
+                            <h5>{{item.show_name}}</h5>
                         </a>
-                        <h6><i>2019.11.30</i>-<i>2020.01.18</i></h6>
+                        <h6><i>{{item.display_show_time}}</i></h6>
                         <div id="btn">
-                            <a>深圳</a><a>广州</a>
-                            <a>上海</a><a>北京</a>
-                            <a>杭州</a><a>查看更多</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a href="#"><img src="https://image.juooo.com/group1/M00/03/26/rAoKNVzIFqmAcoswAABmDtTNJyI871.jpg"/></a>
-                    <div id="right">
-                        <a  href="#">
-                            <h5>百老汇摇滚音乐剧《吉屋出租RENT》中文版</h5>
-                        </a>
-                        <h6><i>2019.11.30</i>-<i>2020.01.18</i></h6>
-                        <div id="btn">
-                            <a>深圳</a><a>广州</a>
-                            <a>上海</a><a>北京</a>
-                            <a>杭州</a><a>查看更多</a>
+                            <a v-for="(n,i) in item.cityItems" :key="i">{{n.city_name}}</a>
                         </div>
                     </div>
                 </li>
             </ol>
         </section> 
-        <!-- </div> -->
-        
     </div>
 </template>
 <script>
-import {performApi} from "@api/classify"
+import axios from "axios"
 export default {
+    name:"Perform",
+    data(){
+        return{
+            datalist:"",
+            name:[],
+            flag:""
+        }
+    },
     created(){
-        this.getPerform();
+        axios({
+            method:"get",
+            url:"http://localhost:3000/data",
+        }).then((res)=>{
+            this.datalist=res.data;
+            this.getUrlName(this.datalist)
+            // this.flag=this.datalist.pc_url;
+             console.log(this.datalist);
+            console.log(Number(this.datalist[1].show_id));
+        })
     },
     methods:{
-        async getPerform(){
-            let data =await performApi();
-            console.log(data);
+        getUrlName(data){//匹配出跳转的参数名字
+            let name=[];
+            data.forEach((ele) => {
+                name.push(ele.show_name);
+            });
+            name.forEach((ele)=>{
+                ele=ele.replace(/^([\u4e00-\u9fa5]|\w+)+/g,"")
+                this.name.push(ele.replace(/([\u4e00-\u9fa5]+)$/g,""))
+            })
+          
         }
     }
 }
 </script>
 <style>
-    /* #header{background: white;} */
     #perform section{ position: absolute; left: 0;right: 0;top: 0; bottom: 0;overflow: auto;padding-top: .35rem;}
     #perform section ol{display: flex;padding: .08rem;flex-direction: column;margin-top: 0.02rem;}
     #perform section ol li{ list-style: none;display: flex;font-size: .14rem; color: #666; padding: 0.09rem 0;border-bottom: .01rem solid #eee;}
@@ -89,12 +92,12 @@ export default {
     #btn{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         margin-top: 0.05rem;
     }
     #perform ol li #btn a{ 
         height: 0.25rem;
-        width: 0.67rem;
+        width: 0.47rem;
         line-height: 0.25rem;
         font-size: .12rem;
         transform: scale(0.9);
@@ -102,9 +105,6 @@ export default {
         border: .01rem solid #ebebeb;
         text-align: center;
         box-sizing: border-box;
-        margin-bottom: .02rem;
-    }
-    #btn a:nth-of-type(6){
-        background: #f5f5f5;
+        margin-bottom: .035rem;
     }
 </style>

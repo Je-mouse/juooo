@@ -79,30 +79,24 @@ export const discountApi=(cate_id)=>http({
     }
 })
 /**
- * 巡回演出
+ * 巡回演出-------mock数据
 */
-export const performApi=()=>http({
-    method:"post",
-    url:"/tour/ShowList",
-    // headers:{'Content-Type':''}
-    // url:"/Tour/moreTourShowList"
-})
     
 /**
- * theater---->热门场馆
+ * Hot_search---->热门场馆-->热门搜索 
 */
-// export const theaterApi=()=>http({
-//     method:"get",
-//     url:"/Show/Search/getShowList",
-//     data:{
-//         keywords:"%25E5%2590%2589%25E5%25B1%258B%25E5%2587%25BA%25E7%25A7%259FRENT",
-//         venue_id:"",
-//         page:1,
-//         sort_type:1,
-//         version:"6.0.8",
-//         referer:2
-//     }
-// })
+export const hotSearchApi=(keywords)=>http({
+    method:"get",
+    url:"/Show/Search/getShowList",
+    data:{
+        keywords:keywords,
+        venue_id:"",
+        page:1,
+        sort_type:1,
+        version:"6.0.8",
+        referer:2
+    }
+})
 
 /**
  * 热门场馆
@@ -120,11 +114,11 @@ export const theaterApi=()=>http({
 /**
  * 演出详情前篇
 */
-export const BeforeApi=()=>http({
+export const BeforeApi=(show_id)=>http({
     method:"get",
-    url:"Schedule/schedule/getTourShowInfo?",
+    url:"Schedule/schedule/getTourShowInfo",
     data:{
-        show_id:36016,
+        show_id:show_id,
         version:"6.0.8",
         referer:2
     }

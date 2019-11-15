@@ -20,7 +20,7 @@
                 <div class="right">
                     <p>{{list.show_name}}</p>
                     <h5>{{list.total_city}}个城市<i>|</i>{{list.total_show}}场演出</h5>
-                    <span>{{fe_time}}</span>
+                    <!-- <span>{{fe_time}}</span> -->
                 </div>
             </div>
         </div>
@@ -34,36 +34,35 @@
                 </div>
             </div>
         </section>
+        <router-view></router-view>
     </div>
 </template>
 <script>
 import {BeforeApi} from "@api/classify"
 export default {
+    name:"before",
     data(){
         return{
             list:"",
             tour_list:[],
-            time:[],
-            fe_time:""
+            time:[]
         }
     },
     created(){
-        this.getBeforeList();
+        this.getBeforeList(this.$route.params.show_id);
     },
     methods:{
-        async getBeforeList(){
-            let data = await BeforeApi();
+        async getBeforeList(id){
+            let data = await BeforeApi(id);
             console.log(data);
             this.list=data.data;
             let tour_list=data.data.tour_list;
-           
             for(var k in tour_list){
                 this.tour_list.push(tour_list[k]);
             }
             this.tour_list.sort((a,b)=>{
                 return b-a;
             })
-            
             this.getTime();
         },
         getTime(){
@@ -72,8 +71,8 @@ export default {
             }
             console.log(this.time);
             // console.log(this.time[0]);
-            this.fe_time=this.time[0].slice(0,10)+'-'+this.time[this.time.length-1].slice(5,10);
-            console.log(this.fe_time)
+            // this.fe_time=this.time[0].slice(0,10)+'-'+this.time[this.time.length-1].slice(5,10);
+            // console.log(this.fe_time)
         }
     }
 }

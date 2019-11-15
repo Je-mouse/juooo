@@ -1,0 +1,208 @@
+{
+"data":[
+        {   
+            "city_id": "11,3,1,4,54,5,36",
+            "show_id":"40123",
+            "show_name":"百老汇摇滚音乐剧《吉屋出租RENT》中文版",
+            "pic":"https://image.juooo.com//group1/M00/03/C6/rAoKNV2LLH2APnJ1AABQng1t4ls214.jpg",
+            "display_show_time": "2019.11.30 - 2020.01.16",
+            "pc_url": "k",
+            "cityItems":
+            [
+                {
+                    "city_Id":1,
+                    "city_name":"深圳"
+                },
+                {
+                    "city_Id":3,
+                    "city_name":"广州"
+                },
+                {
+                    "city_Id":4,
+                    "city_name":"上海"
+                },
+                {
+                    "city_Id":5,
+                    "city_name":"北京"
+                },
+                {
+                    "city_Id":11,
+                    "city_name":"杭州"
+                },
+                {
+                    "city_Id":36,
+                    "city_name":"石家庄"
+                },
+                {
+                    "city_Id":54,
+                    "city_name":"南京"
+                }
+            ]
+            
+        },
+        {
+            "city_id": "36,4,5,3,1",
+            "show_id":"36016",
+            "show_name":"法语音乐剧《摇滚红与黑》",
+            "pic":"https://image.juooo.com//group1/M00/02/C7/rAoKmV0ZvraAK32GAAA65fDJuB8087.jpg",
+            "display_show_time": "2019.09.27 - 2019.11.17",
+            "pc_url": "sid",
+            "cityItems":
+            [
+                {
+                    "city_Id":1,
+                    "city_name":"深圳"
+                },
+                {
+                    "city_Id":3,
+                    "city_name":"广州"
+                },
+                {
+                    "city_Id":4,
+                    "city_name":"上海"
+                },
+                {
+                    "city_Id":5,
+                    "city_name":"北京"
+                },
+                {
+                    "city_Id":36,
+                    "city_name":"石家庄"
+                }
+            ]            
+        },
+        {
+            "city_id": "1,10149,36,10001,10055",
+            "show_id":"38837",
+            "show_name":"2019越剧《红楼梦》",
+            "pic":"https://image.juooo.com//group1/M00/03/6F/rAoKNV0XLZ-AN4Y5AACRa4Cctrk263.jpg",
+            "display_show_time": "2019.08.30 - 2019.12.20",
+            "pc_url": "sid",
+            "cityItems":
+            [
+                {
+                    "city_Id":1,
+                    "city_name":"深圳"
+                },
+                {
+                    "city_Id":36,
+                    "city_name":"石家庄"
+                },
+                {
+                    "city_Id":10001,
+                    "city_name":"合肥"
+                },
+                {
+                    "city_Id":10055,
+                    "city_name":"陵水"
+                },
+                {
+                    "city_Id":10149,
+                    "city_name":"兴安盟"
+                }
+            ]
+        },
+        {
+            "city_id": "60,10006,36,12",
+            "show_id":"36595",
+            "show_name":"话剧《蒋公的面子》",
+            "pic":"https://image.juooo.com//group1/M00/01/E8/rAoKmVxS0JKALcHWAABmP_sHNe4613.jpg",
+            "display_show_time": "2019.08.17 - 2019.12.22",
+            "pc_url": "sid",
+            "cityItems":
+            [
+                {
+                    "city_Id":12,
+                    "city_name":"重庆"
+                },
+                {
+                    "city_Id":36,
+                    "city_name":"石家庄"
+                },
+                {
+                    "city_Id":60,
+                    "city_name":"太原"
+                },
+                {
+                    "city_Id":10006,
+                    "city_name":"济南"
+                }
+            ]
+        },
+        {
+            "city_id": "10149,36,54,10001,12,17",
+            "show_id":"40095",
+            "show_name":"【万有音乐系】意大利米兰交响乐团2020新年音乐会",
+            "pic":"https://image.juooo.com//group1/M00/03/11/rAoKmV1-87eAATVZAACiNRBcAok761.jpg",
+            "display_show_time": "2019.12.22 - 2020.01.04",
+            "cityItems":
+            [
+                {
+                    "city_Id":12,
+                    "city_name":"重庆"
+                },
+                {
+                    "city_Id":17,
+                    "city_name":"武汉"
+                },
+                {
+                    "city_Id":36,
+                    "city_name":"石家庄"
+                },
+                {
+                    "city_Id":10001,
+                    "city_name":"合肥"
+                },
+                {
+                    "city_Id":10149,
+                    "city_name":"兴安盟"
+                }
+            ]
+        },
+        {
+            "city_id": "1,12,6",
+            "show_id":"39497",
+            "show_name":"七年之痒·RESOUND理想人声阿卡贝拉流行音乐会",
+            "pic":"https://image.juooo.com//group1/M00/02/ED/rAoKmV1LdYmAcV_xAACHjB8tFHI335.jpg",
+            "display_show_time": "2019.10.11 - 2019.12.20",
+            "cityItems":
+            [
+                {
+                    "city_Id":12,
+                    "city_name":"重庆"
+                },
+                {
+                    "city_Id":1,
+                    "city_name":"深圳"
+                },
+                {
+                    "city_Id":6,
+                    "city_name":"成都"
+                }
+            ]
+        },
+        {
+            "city_id": "5,10001,4",
+            "show_id":"39971",
+            "show_name":"【万有音乐系】《吉普赛狂欢夜—匈牙利国宝乐团波西米亚人2019巡回音乐会》",
+            "pic":"https://image.juooo.com//group1/M00/03/C4/rAoKNV2IkS6AKVnkAABk58x045o130.jpg",
+            "display_show_time": "2019.08.17 - 2019.12.22",
+            "cityItems":
+            [
+                {
+                    "city_Id":4,
+                    "city_name":"上海"
+                },
+                {
+                    "city_Id":5,
+                    "city_name":"北京"
+                },
+                {
+                    "city_Id":10001,
+                    "city_name":"合肥"
+                }
+            ]
+        }
+    ]
+}
+   
