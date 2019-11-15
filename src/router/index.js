@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-<<<<<<< HEAD
 import homepage from './homepage'
 Vue.use(VueRouter)
 
@@ -64,37 +63,4 @@ router.beforeEach((to, from, next) => {
 })
 
 
-=======
-import classify from './classify'
-// import credit from './credit'
-import detail from './detail'
-import discount from './discount'
-import perform from './perform'
-import searchHot from './searchHot'
-import theater from './theater'
-import ticket from './ticket'
-import before from './before'
-
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  mode:"hash",
-  routes:[
-    classify,
-    detail,
-    {
-      path:"/credit",
-      component:_=>import("@pages/jerry/credit"),
-      name:"credit"
-    },
-    discount,
-    perform,
-    searchHot,
-    theater,
-    ticket,
-    before
-  ]
-})
-
->>>>>>> b1e3eb347d6b81c59dcc391e3cdcd46291f55270
 export default router;
