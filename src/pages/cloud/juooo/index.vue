@@ -7,12 +7,12 @@
           <span>{{this.$store.state.city.name}}</span>
         </div>
         <input type="text" placeholder="搜索热门演出" @click="handleSearch()"/>
-        <div class="head-space" v-for="(img,imgpic) in top_icon" :key="imgpic">
+        <router-link tag="div" class="head-space" v-for="(img,imgpic) in top_icon" :key="imgpic" to="/homepage">
           <img 
             :src="img.pic"
             alt
           />
-        </div>
+        </router-link>
       </div>
       <div class="swiper-container" ref="wrapper1">
         <div class="swiper-wrapper" id="wrapper">
@@ -29,18 +29,18 @@
       <div class="main">
         <div class="label">
           <ul>
-            <li v-for="classify in classify_list" :key="classify.id" >
+            <router-link tag="li" :to="'/classify?'+classify.category_id" v-for="classify in classify_list" :key="classify.id" >
               <img
                 :src="classify.pic"
                 alt
               />
               <p>{{classify.name}}</p>
-            </li>
+            </router-link>
           </ul>
         </div>
       </div>
 
-      <div class="section">
+      <div class="section" v-if="isShow">
         <h3>
           热门演出
           <span>
@@ -51,13 +51,13 @@
           </span>
         </h3>
         <ul>
-          <li v-for="(hots_show_list,wei) in show_list" :key="wei">
+          <router-link tag="li" :to="'/detail?'+hots_show_list.schedular_url.slice(-6)" v-for="(hots_show_list,index) in show_list" :key="index">
             <img
               :src="hots_show_list.pic"
               alt
             />
             <h4>{{hots_show_list.show_name}}</h4>
-          </li>
+          </router-link>
         </ul>
       </div>
 
@@ -67,11 +67,11 @@
             </h3>
             <ul class="show_box">
               <div>
-                <li class="show_heng" v-for="(xunhuiList,xun) in xunhuiList" :key="xun">
+                <router-link  tag="li" :to="'/search'" class="show_heng" v-for="(xunhuiList,xun) in xunhuiList" :key="xun">
                     <img :src="xunhuiList.pic">
                     <h3>{{xunhuiList.show_name}}</h3>
                     <p>{{xunhuiList.schedular_num}}场巡演</p>
-                </li>
+                </router-link>
               </div>
             </ul>
         </div>
@@ -91,7 +91,7 @@
                 />
               </span>
             </h3>
-            <div class="left_vip" v-if="zhuan[0]">
+            <router-link tag="div"  :to="'/member'" class="left_vip" v-if="zhuan[0]">
               <img
                 :src="zhuan[0].pic"
                 alt
@@ -100,7 +100,7 @@
                 ￥{{0}}
                 <del>￥{{parseInt(zhuan[0].price)}}</del>
               </p>
-            </div>
+            </router-link>
           </div>
           <div class="right">
             <h3>
@@ -113,19 +113,20 @@
               </span>
             </h3>
             <div class="right_vip" v-if="zhe">
-              <img
-                :src="zhe.pic"
-                alt
-              />
-              <p>
-                {{zhe.min_discount}}
-                <span>折</span>
-              </p>
+              <router-link tag="i" to="/discount">
+                <img 
+                  :src="zhe.pic"
+                  alt/>
+                <p>
+                  {{zhe.min_discount}}
+                  <span>折</span>
+                </p>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
-      <div class="warp">
+      <div class="warp" v-if="isYue">
         <div class="warp_list">
           <h3>
             演唱会
@@ -136,7 +137,7 @@
               />
             </span>
           </h3>
-          <div class="warp_list-box">
+          <router-link tag="div" :to="'/detail?'+music.sche_id" class="warp_list-box">
             <div class="warp_list-row" v-if="music">
               <img
                 :src="music.pic"
@@ -151,10 +152,10 @@
                 <p>{{music.city_name}} | {{music.venue_name}}</p>
               </div>
             </div>
-          </div>
+          </router-link>
           <div class="warp_list-column" v-if="musiclist">
             <ul>
-              <li v-for="(musiclist,sche_id) in musiclist" :key="sche_id">
+              <router-link tag="li" :to="'/detail?'+musiclist.sche_id" v-for="(musiclist,sche_id) in musiclist" :key="sche_id">
                 <img
                   :src="musiclist.pic"
                   alt
@@ -164,7 +165,7 @@
                   <b>¥{{parseInt(musiclist.low_price)}}</b>
                   <span>起</span>
                 </p>
-              </li>
+              </router-link>
             </ul>
           </div>
         </div>
@@ -172,15 +173,15 @@
       <div class="place">
         <h3 class="flexbox">
           热门场馆
-          <span>
+          <router-link tag="span" to="/cinema">
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAALVBMVEUAAABmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaTgChpAAAAD3RSTlMA/Aa1qrzcwa+ezcijk5JAYXVXAAAAVUlEQVQoz2MYtoDNAIsghzA2pYEOWASZRbApNWzAIqiKTSlT4QEsouqS2JQGXsAiqpVApCDTxgeYgtoy2OyZQJyLmAqxhAirBLbwcCAy5NgaGIYzAADnxQppL/x7ngAAAABJRU5ErkJggg=="
               alt
             />
-          </span>
+          </router-link>
         </h3>
         <div class="bao">
-          <div class="place_box" v-for="(hotguan,index) in hotguan" :key="index">
+          <router-link  tag="div" to="/cinema" class="place_box" v-for="(hotguan,index) in hotguan" :key="index">
             <div class="place_box-list">
               <div class="addres">
                 <div class="addres_img">
@@ -206,22 +207,19 @@
                 </p>
               </div>
               <ul>
-                <li v-for="(n,i) in hotguan.showList" :key="i">
-                  <img
-                    :src="n.pic"
-                    alt
-                  />
-                </li>
+                <router-link tag="li" :to="'/detail'+n.id" v-for="(n,i) in hotguan.showList" :key="i">
+                  <img :src="n.pic"/>
+                </router-link>
               </ul>
             </div>
-          </div>
+          </router-link>
         </div>
       
     </div>
     <div class="foryou">
       <h4>为你推荐</h4>
       <div class="all">
-        <div class="showlist" v-for="(foryou,red) in foryou" :key="red" >
+        <router-link tag="div" :to="'/detail'+foryou.sche_id" class="showlist" v-for="(foryou,red) in foryou" :key="red" >
           <div class="showlist_img">
             <img
               :src="foryou.schePic"
@@ -241,7 +239,7 @@
               <span>起</span>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -251,17 +249,16 @@
 <script>
 import {juoooApi,juoooMiddleApi,juoooForYouApi ,juooofenleiApi,juoooXunHuiApi,juoooHotGuanApi} from "@api/juooo";
 import {vipApi} from "@api/vip";
+import MessageBox from "../../../lib/messageBox/index.js";
+import loading from "../../../lib/loading/index.js";
+
 export default {
   name: "Juooo",
   data(){
     return{
       top_icon:[],//头部的gif图
-      advert:"",//椭圆图
-      classify_list:[], //五种剧类型
+      classify_list:[], //类型
       slide_list:[],//轮播图
-      operation_list:[],//operation部分
-      ollist:[],//operation上部分
-      ullist:[],//operation下部分
       show_list:[],//热门演出
       foryou:[],//为你推荐
       zhuan:"",//专属票价
@@ -270,40 +267,57 @@ export default {
       musiclist:[],//音乐会例表
       xunhuiList:[],//巡回演出
       hotguan:[],//热门场馆
+      isShow:"",//控制热门演出有没有
+      isYue:""//控制音乐会有没有
     }
   },
   created(){
     this.handleGetJuoooList();
     this.handleGetShowList();
     this.handleGetForList();
-    this.handleGetDiscount();//折扣
+    this.handleGetDiscount();//折扣 
     this.handleGetFenLei();
     this.handleGetXunHui();
     this.handleGetHotGuan();
+    MessageBox({
+      title:"当前城市定位",
+      content:this.$store.state.city.name,
+      ok:()=>{
+        setTimeout(loading.loadingDestroy(),3000)
+      }
+    })
   },
   methods:{
     async handleGetJuoooList(){
-      let data = await juoooApi();
+      let data = await juoooApi(this.$store.state.city.cityId);
       this.top_icon = data.data.top_icon;
-      this.advert = data.data.ad_list.insert_ad[0].pic;
       this.classify_list = data.data.classify_list;
       this.slide_list = data.data.slide_list;
-      // console.log(this.slide_list)
+      //console.log(this.slide_list)
       //console.log(this.classify_list)
-      this.operation_list = data.data.operation_list;
-      for(var i=0;i<this.operation_list.length;i++){
-        this.ollist = this.operation_list.slice(0,2);
-        this.ullist = this.operation_list.slice(-3); 
-      }
+     
     },
     async handleGetShowList(){
-      let data = await juoooMiddleApi();
+      let data = await juoooMiddleApi(this.$store.state.city.cityId);
       this.show_list = data.data.hots_show_list;
-      
+      //console.log(this.show_list)
+      if(this.show_list == ""){
+        this.isShow = false;
+      }else{
+        this.isShow = true;
+      }
     },
     async handleGetForList(){
-      let data = await juoooForYouApi();
+    
+      this.easyName = pinyin.getCamelChars(this.$store.state.city.name); //提取城市首字母大写
+      this.$store.state.city.py= this.easyName;
+      
+      let data = await juoooForYouApi(this.$store.state.city.py);
       this.foryou = data.data.recommend_show_list;
+
+      
+      //console.log(this.foryou)
+      //console.log(this.$store.state.city.py)
     },
     async handleGetDiscount(){
       let data = await vipApi();
@@ -311,16 +325,22 @@ export default {
       this.zhe = data.data.discountList[0];
     },
     async handleGetFenLei(){
-      let data = await juooofenleiApi();
+      let data = await juooofenleiApi(this.$store.state.city.cityId);
+      
       this.music = data.data[4].list.slice(0,1)[0];
       this.musiclist = data.data[4].list.slice(1)
       //console.log(this.musiclist)
-      //console.log(this.music)
-      //console.log(data)
+      
+      if(data.data.length == ""){
+        this.isYue = false;
+      }else{
+        this.isYue = true ;
+      }
     },
     async handleGetXunHui(){
-      let data = await juoooXunHuiApi();
+      let data = await juoooXunHuiApi(this.$store.state.city.cityId);
       this.xunhuiList = data.data.tour_show_list;
+      //console.log(this.xunhuiList)
     },
     async handleGetHotGuan(){
       let data = await juoooHotGuanApi();
@@ -331,7 +351,8 @@ export default {
     },
     handleToCity(){
       this.$router.push("/city")
-    }
+    },
+    
   },
   mounted() {
     this.swiper = new Swiper(this.$refs.wrapper1, {
@@ -347,6 +368,11 @@ export default {
       }
     });
   },
+  watch:{
+    "$route"(to,from){
+        this.$router.go(0)
+    }
+ }
 }
 </script>
 
@@ -414,7 +440,7 @@ li{list-style:none;}
 .vip .vip_box .left h3{width:100%;height:.415rem;display: flex;justify-content: space-between;line-height:.415rem;}
 .vip .vip_box .left span img{width:.2rem;vertical-align: middle;}
 .vip .vip_box .left .left_vip img{width:1.065rem;}
-.vip .vip_box .left .left_vip p{width:.95rem;height:0.248rem;padding:.12rem;font-size:.15rem;color:#ff6743;}
+.vip .vip_box .left .left_vip p{width:.95rem;line-height:0.248rem;font-size:.15rem;color:#ff6743;text-align: center;padding:.06rem;}
 .vip .vip_box .left .left_vip p del{font-size:0.1rem;color: #999;}
 .vip .vip_box .right{width:33.33%;height:2.194rem;}
 .vip .vip_box .right h3{width:100%;height:.415rem;display: flex;justify-content: space-between;line-height:.415rem;}
@@ -456,7 +482,7 @@ li{list-style:none;}
 .place .flexbox span img{width:.2rem;vertical-align: middle;}
 .place .bao{display: flex;overflow: auto;}
 .place .place_box{width:100%;height:2.65rem;margin-top:.128rem;}
-.place .place_box .place_box-list{width:1.93rem;height:2.173rem;padding:.17rem .145rem;border:1px solid #ebebeb;border-radius:0.05rem;margin-right:.2rem;}
+.place .place_box .place_box-list{width:1.93rem;height:2.4rem;padding:.17rem .145rem;border:1px solid #ebebeb;border-radius:0.05rem;margin-right:.2rem;}
 .place .place_box .place_box-list .addres{width:100%;height:.435rem;display:flex;justify-content: space-around;}
 .place .place_box .place_box-list .addres_img{width:.445rem;height:.445rem;}
 .place .place_box .place_box-list .addres_img img{width:100%;height:100%;}
@@ -470,8 +496,7 @@ li{list-style:none;}
 .place .place_box .place_box-list .data p:nth-of-type(2){width:50%;height:0.29rem;position:absolute;display:flex;flex-direction: column;justify-content: space-between;align-items: center;color:#b3b3b3;top:-0.25rem;margin-left:50%;}
 .place .place_box .place_box-list .data p:nth-of-type(2) span:nth-of-type(2){display: block;width:0.06rem;height:0.06rem;background-color: #ccc;border-radius: 50%;}
 .place .place_box .place_box-list ul{width:100%;height:1.266rem;margin-top:.15rem;display:flex;justify-content: space-between;}
-.place .place_box .place_box-list ul li{border: 1px solid #ebebeb;}
-.place .place_box .place_box-list ul li img{width:.824rem;height:1.236rem;}
+.place .place_box .place_box-list ul li img{width:.824rem;height:1.095rem;margin-right:.03rem;}
 
 
 
@@ -485,7 +510,7 @@ li{list-style:none;}
 .foryou .all .showlist .showlist_info{height:1.229rem;margin-left:.128rem;}
 .foryou .all .showlist .showlist_info .showlist_info-time{height:.14rem;margin-top:.05rem;font-weight: bold;}
 .foryou .all .showlist .showlist_info .showlist_info-jieshaobox{height:.6rem;display:flex;flex-direction: column;justify-content: center;}
-.foryou .all .showlist .showlist_info .showlist_info-jieshaobox .showlist_info-jieshao{height:.45rem;font-weight: bold;font-size:.165rem;overflow:hidden;
+.foryou .all .showlist .showlist_info .showlist_info-jieshaobox .showlist_info-jieshao{font-weight: bold;font-size:.165rem;overflow:hidden;
                   text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;}
 .foryou .all .showlist .showlist_info p{font-size:.125rem;color: #666;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 .foryou .all .showlist .showlist_info .showlist_info-monay b{font-size: .15rem;color: #ff6743;font-weight: 400;}

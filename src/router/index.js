@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import homepage from './homepage'
 Vue.use(VueRouter)
-
-
 
 const router = new VueRouter({
   mode:"hash",
   routes:[
+    homepage,
     {
       path:"/",
       redirect:"/juooo",
@@ -19,7 +18,7 @@ const router = new VueRouter({
     {
       path:"/juooo",
       component:_=>import("@pages/cloud/juooo"),
-      name:"juooo",
+      name:"juooo", 
       meta:{
         toggle:true,
         requiredAuth:false
@@ -40,7 +39,7 @@ const router = new VueRouter({
       name:"ticket",
       meta:{
         toggle:true,
-        requiredAuth:false  //合并时改成true
+        requiredAuth:true  //合并时改成true
       }
     },
     {
@@ -49,7 +48,7 @@ const router = new VueRouter({
       name:"mine",
       meta:{
         toggle:true,
-        requiredAuth:false  //合并时改成true
+        requiredAuth:true  //合并时改成true
       }
     },
     {
@@ -65,7 +64,7 @@ const router = new VueRouter({
       component:_=>import("@pages/cloud/mycard"),
       name:"mycard",
       meta:{
-        requiredAuth:false  //合并时改成true
+        requiredAuth:true  //合并时改成true
       }
     },
     {
@@ -81,7 +80,7 @@ const router = new VueRouter({
       component:_=>import("@pages/cloud/changeloginpwd"),
       name:"changeloginpwd",
       meta:{
-        requiredAuth:false  //合并时改成true
+        requiredAuth:true  //合并时改成true
       },
     },
     {
@@ -89,20 +88,65 @@ const router = new VueRouter({
       component:_=>import("@pages/cloud/changeloginpwdstate"),
       name:"changeloginpwdstate",
       meta:{
-        requiredAuth:false  //合并时改成true
+        requiredAuth:true  //合并时改成true
       },
     },
     {
       path:"/city",
       component:_=>import("@pages/cloud/city"),
       name:"city"
-    }
+    },
+    {
+      path: "/buycard",//购买新卡
+      name: "buycard",
+      meta: {
+          flag: true,
+          requiredAuth: true
+      },
+      component: _ => import("@pages/grace/buycard")
+  },
+  {
+      path: "/login",//登录
+      name: "login",
+      meta: {
+          flag: false,
+          requiredAuth: true
+      },
+      component: _ => import("@pages/grace/login")
+  },
+  {
+      path: "/savemoney",//省钱攻略
+      name: "savemoney",
+      meta: {
+          flag: false,
+          requiredAuth: true
+      },
+      component: _ => import("@pages/grace/savemoney")
+  },
+  {
+      path: "/member",//省钱攻略
+      name: "member",
+      meta: {
+          flag: false,
+          requiredAuth: true
+      },
+      component: _ => import("@pages/grace/member")
+  },
+  {
+    path: "/detail",//省钱攻略
+    name: "detail",
+    meta: {
+        flag: false,
+        requiredAuth: true
+    },
+    component: _ => import("@pages/jerry/detail")
+  }
   ]
 })
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to,from,next)=>{ 
   if(to.path !="/login" && to.meta.requiredAuth){
-      if(localStorage.getItem("token")){
+      if(document.cookie.indexOf("token") != -1){
           next();
       }else{
           next({name:"login",params:{to:to.path}})
@@ -111,6 +155,5 @@ router.beforeEach((to,from,next)=>{
       next();
   }
 })
-
 
 export default router;

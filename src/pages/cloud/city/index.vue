@@ -1,6 +1,11 @@
 <template>
-  <div class="city_container">
+  <div class="city_container" ref="citycontainer">
     
+      <div class="city_header">
+        <v-touch tag="div" @tap="handleback()" class="back" >&lt;</v-touch>
+        <div class="option">城市选择</div>
+      </div>
+
       <div class="city_body" ref="cityBody">
           <!--热门城市-->
           <div class="hot_city">
@@ -58,27 +63,42 @@ export default {
   },
   methods: {
     handleTo(index) {
-      let t = this.$refs.cityList.querySelectorAll(".city_title_letter")[index]
-        .offsetTop;
-      console.log(t)
-     this.$refs.cityBody.style.marginTop = -t+"px";
-
+      let t = this.$refs.cityList.querySelectorAll(".city_title_letter")[index].offsetTop;
+      this.$refs.citycontainer.scrollTop = t; 
     },
     handleCityTo(city){
       //console.log(city)
-      let path = this.$route.query.path || "/"
-      this.$router.push(path);
+      // let path = this.$route.query.path || "/"
       this.$store.commit("city/handleUpdateCityInfo",city)
+      this.$router.push("/");
     },
     handleHotCityTo(item){
       console.log(item)
-      
+    },
+    handleback(){
+      this.$router.back("/juooo")
     }
   }
 };
 </script>
 
 <style>
+.city_header{
+  width:100%;
+  height:.36rem;
+  background:#Fff;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+.city_header .back{
+  margin-left:.1rem;
+}
+.city_header .option{
+  flex:1;text-align: center;
+}
+
+
 .city_container{
   height: 100%;
   overflow: auto;

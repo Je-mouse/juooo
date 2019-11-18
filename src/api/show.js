@@ -2,7 +2,7 @@ import http from "@utils/request";
 
 export const SearchApi = ()=>http({
     method:"get",
-    url:"/Show/Search/getHotWord",
+    url:"/yun/Show/Search/getHotWord",
     data:{
         version:"6.0.7",
         referer:2
@@ -11,7 +11,7 @@ export const SearchApi = ()=>http({
 
 export const SearchDataApi = (keywords) => http({
     method:"get",
-    url:"Show/Search/getShowList",
+    url:"/yun/Show/Search/getShowList",
     data:{
         keywords,
         page:1,

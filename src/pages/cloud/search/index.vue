@@ -2,7 +2,7 @@
   <div>
       <header>
         <div class="inner">
-            <input type="text"  placeholder="搜索热门演出" :value="tuijian" @input="handledata($event)" ref="cancel"/>
+            <input type="text"  placeholder="搜索热门演出" v-model="tuijian" ref="cancel"/>
             <div class="search"></div> 
             <v-touch  class="cancel" @tap="handleValue()"></v-touch>
         </div>  
@@ -19,7 +19,7 @@
     </div>
     
     <div class="searchListCall"  v-if="flag">
-        <div class="searchListCall_data" v-for="(searchList,ren) in searchList" :key="ren">
+        <router-link tag="div" :to="'/detail?'+searchList.schedular_id" class="searchListCall_data" v-for="(searchList,ren) in searchList" :key="ren">
             <div class="imginfo">
                 <img :src="searchList.pic">
             </div>
@@ -29,7 +29,7 @@
                 <p style="color:#999;font-size:.1rem">{{searchList.city_name}} | {{searchList.venue_name}}</p>
                 <p class="price">￥{{parseInt(searchList.min_price)}}<span>起</span></p>
             </div>
-        </div>
+        </router-link>
     </div>
   </div>
 </template>
@@ -52,6 +52,11 @@ export default {
         this.handleHotShow();
         this.handledata();
     },
+    watch:{
+        tuijian(){
+            this.handledata()
+        }
+    },
     methods:{
         async handleHotShow(){
             let data = await SearchApi();
@@ -70,25 +75,67 @@ export default {
             this.$refs.cancel.value = "";
             this.flag = false;
         },
-        async handledata(e){
+        async handledata(){
             throttle(async ()=>{
-                let data = await SearchDataApi(e.target.value);
+                let data = await SearchDataApi(this.tuijian);
                 this.searchList = data.data.list;
             })
-            //console.log(data,111);
-        
-            if(e.target.value.length == ! 0){
+            // console.log(this.searchList)
+            if(this.tuijian.length == ! 0){
                 this.flag = true;
             }else{
                 this.flag = false;
             }
-            //console.log(this.searchList)
         }
     }
 }
 </script>
 
 <style scoped>
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size:31.25vw;
+}
+html,body{
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+a{
+    text-decoration: none;
+    color: #232323;
+}
+img{
+    border: none;
+}
+/* 头部 */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: .37rem;
+    width: 100%;
+    background-color: #fff;
+    color: #232323;
+    padding: 0 .1rem;
+    box-sizing: border-box;
+    border-bottom: .01rem solid #ebebeb;
+    z-index: 100;
+}
+header h1{
+    font-weight: normal;
+    font-size: .15rem;
+}
+.icon-icon-test{
+    height:.2rem;
+    width: .2rem;
+    font-size: .2rem;
+}
 header{border: none;}
 body{font-size:14px;background:#fff}
 li{list-style: none;}

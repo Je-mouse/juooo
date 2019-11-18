@@ -126,8 +126,8 @@ export default {
     .header .userinfo .userinfo_head .name{ position: absolute;color: #232323;font-weight: 700;margin-left:0.6rem;margin-top:0.1rem;}
     .header .userinfo .userinfo_head .userid{color: #999;font-size:0.01rem;margin-left:0.6rem;margin-top:0.3rem;position: absolute}
     .header .userinfo .vip{width:2.944rem;height:0.219rem;}
-    .header .userinfo .vip p{width:0.478rem;height:0.16rem;padding:0.03rem 0.08rem;float:right;background:#f5dea9;border-radius:1rem  0 0 1rem;color: #454341;
-                font-weight: 700;font-size:0.115rem;text-align: center;line-height:0.16rem;}
+    .header .userinfo .vip p{width:0.6rem;height:0.16rem;padding:0.03rem 0.08rem;float:right;background:#f5dea9;border-radius:1rem  0 0 1rem;color: #454341;
+                font-weight: 700;font-size:0.115rem;text-align: center;line-height:0.16rem;white-space: nowrap;}
     .header .userinfo .situation{width:100%;height:0.66rem;}
     .header .userinfo .situation ul{display:flex;width:100%;}
     .header .userinfo .situation ul li{box-sizing: border-box;width:25%;padding:0.128rem 0 0.166rem;height:0.694rem;position:relative;text-align: center;}
