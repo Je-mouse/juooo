@@ -10,7 +10,10 @@
     "axios": "^0.19.0",
     "better-scroll": "^1.15.2",
     "core-js": "^3.3.2",
+<<<<<<< HEAD
     "json-server": "^0.15.1",
+=======
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     "mint-ui": "^2.2.13",
     "vue": "^2.6.10",
     "vue-cookies": "^1.5.13",

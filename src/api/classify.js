@@ -5,7 +5,11 @@ import http from "@utils/request";
  */
 export const classifyApi=(category=35,city_id=0)=>http({
     method:"get",
+<<<<<<< HEAD
     url:"/Jerry/Show/Search/getShowList",
+=======
+    url:"/yun/Show/Search/getShowList",
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     data:{
         category:category,
         city_id:city_id,
@@ -16,11 +20,28 @@ export const classifyApi=(category=35,city_id=0)=>http({
     }
 })
 /**
+<<<<<<< HEAD
+=======
+ * 获取积分页数据
+*/
+export const creditApi=(city_id=0)=>http({
+    method:"post",
+    url:"/yun/Scores/getAllScoresList",
+    data:{
+        city_id:city_id
+    }
+})
+/**
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
  * 获取详情页商品
 */
 export const detailApi=(schedular_id)=>http({
     method:"get",
+<<<<<<< HEAD
     url:"/Jerry/Schedule/Schedule/getScheduleInfo",
+=======
+    url:"/yun/Schedule/Schedule/getScheduleInfo",
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     data:{
         schedular_id:schedular_id,
         version:"6.0.8",
@@ -32,7 +53,11 @@ export const detailApi=(schedular_id)=>http({
 */
 export const detailCityApi=(show_id,venue_id)=>http({
     mothod:"get",
+<<<<<<< HEAD
     url:"/Jerry/Schedule/Schedule/getTour",
+=======
+    url:"/yun/Schedule/Schedule/getTour",
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     data:{
         show_id:show_id,
         venue_id:venue_id,
@@ -45,7 +70,11 @@ export const detailCityApi=(show_id,venue_id)=>http({
 */
 export const detailCutApi=(id)=>http({
     method:"post",
+<<<<<<< HEAD
     url:"/Jerry/Promotion/Coupon/getCouponList",
+=======
+    url:"/yun/Promotion/Coupon/getCouponList",
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     data:{
         id:id,
         version:"6.0.7",
@@ -57,7 +86,11 @@ export const detailCutApi=(id)=>http({
 */
 export const discountApi=(cate_id)=>http({
     method:"get",
+<<<<<<< HEAD
     url:"/Jerry/vip/index/getDiscountList",
+=======
+    url:"/yun/vip/index/getDiscountList",
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     data:{
         page:1,
         city_id:0,
@@ -70,6 +103,15 @@ export const discountApi=(cate_id)=>http({
 /**
  * 巡回演出-------mock数据
 */
+<<<<<<< HEAD
+=======
+export const performApi=()=>http({
+    method:"post",
+    url:"/yun/tour/ShowList",
+    // headers:{'Content-Type':''}
+    // url:"/Tour/moreTourShowList"
+})
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     
 /**
  * Hot_search---->热门场馆-->热门搜索 
@@ -92,7 +134,11 @@ export const hotSearchApi=(keywords)=>http({
 */
 export const theaterApi=()=>http({
     method:"get",
+<<<<<<< HEAD
     url:"/Jerry/theatre/index/getTheatreList",
+=======
+    url:"/yun/theatre/index/getTheatreList",
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     data:{
         page:1,
         version:"6.0.8",
@@ -105,7 +151,11 @@ export const theaterApi=()=>http({
 */
 export const BeforeApi=(show_id)=>http({
     method:"get",
+<<<<<<< HEAD
     url:"/Jerry/Schedule/schedule/getTourShowInfo",
+=======
+    url:"/yun/Schedule/schedule/getTourShowInfo?",
+>>>>>>> 7581d79be18c96aca3efcb213c3d1ba7d55d298e
     data:{
         show_id:show_id,
         version:"6.0.8",
