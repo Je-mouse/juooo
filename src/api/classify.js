@@ -5,7 +5,7 @@ import http from "@utils/request";
  */
 export const classifyApi=(category=35,city_id=0)=>http({
     method:"get",
-    url:"/Show/Search/getShowList",
+    url:"/Jerry/Show/Search/getShowList",
     data:{
         category:category,
         city_id:city_id,
@@ -16,21 +16,11 @@ export const classifyApi=(category=35,city_id=0)=>http({
     }
 })
 /**
- * 获取积分页数据
-*/
-export const creditApi=(city_id=0)=>http({
-    method:"post",
-    url:"/Scores/getAllScoresList",
-    data:{
-        city_id:city_id
-    }
-})
-/**
  * 获取详情页商品
 */
 export const detailApi=(schedular_id)=>http({
     method:"get",
-    url:"/Schedule/Schedule/getScheduleInfo",
+    url:"/Jerry/Schedule/Schedule/getScheduleInfo",
     data:{
         schedular_id:schedular_id,
         version:"6.0.8",
@@ -42,7 +32,7 @@ export const detailApi=(schedular_id)=>http({
 */
 export const detailCityApi=(show_id,venue_id)=>http({
     mothod:"get",
-    url:"/Schedule/Schedule/getTour",
+    url:"/Jerry/Schedule/Schedule/getTour",
     data:{
         show_id:show_id,
         venue_id:venue_id,
@@ -55,9 +45,8 @@ export const detailCityApi=(show_id,venue_id)=>http({
 */
 export const detailCutApi=(id)=>http({
     method:"post",
-    url:"/Promotion/Coupon/getCouponList",
+    url:"/Jerry/Promotion/Coupon/getCouponList",
     data:{
-        // schedular_id:97846,
         id:id,
         version:"6.0.7",
         referer:2
@@ -68,7 +57,7 @@ export const detailCutApi=(id)=>http({
 */
 export const discountApi=(cate_id)=>http({
     method:"get",
-    url:"/vip/index/getDiscountList",
+    url:"/Jerry/vip/index/getDiscountList",
     data:{
         page:1,
         city_id:0,
@@ -87,7 +76,7 @@ export const discountApi=(cate_id)=>http({
 */
 export const hotSearchApi=(keywords)=>http({
     method:"get",
-    url:"/Show/Search/getShowList",
+    url:"/Jerry/Show/Search/getShowList",
     data:{
         keywords:keywords,
         venue_id:"",
@@ -103,7 +92,7 @@ export const hotSearchApi=(keywords)=>http({
 */
 export const theaterApi=()=>http({
     method:"get",
-    url:"/theatre/index/getTheatreList",
+    url:"/Jerry/theatre/index/getTheatreList",
     data:{
         page:1,
         version:"6.0.8",
@@ -116,10 +105,30 @@ export const theaterApi=()=>http({
 */
 export const BeforeApi=(show_id)=>http({
     method:"get",
-    url:"Schedule/schedule/getTourShowInfo",
+    url:"/Jerry/Schedule/schedule/getTourShowInfo",
     data:{
         show_id:show_id,
         version:"6.0.8",
         referer:2
+    }
+})
+/**
+ * 获取积分页数据
+*/
+export const creditApi=(city_id=0)=>http({
+    method:"post",
+    url:"/Juooo/Scores/getAllScoresList",
+    data:{
+        city_id:city_id
+    }
+})
+/**
+ * 获得场馆信息
+*/
+export const stadiumApi=(tid=2)=>http({
+    method:"get",
+    url:"/Juooo/theatre/index",
+    data:{
+        tid:tid
     }
 })

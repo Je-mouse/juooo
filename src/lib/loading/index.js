@@ -13,7 +13,9 @@ class JSLoading {
         document.body.appendChild(this.loadingVm.$mount().$el)
     }
 	loadingDestroy(){
-	    document.body.removeChild(this.loadingVm.$mount().$el)
+        if(document.body.children.length>=4){
+            document.body.removeChild(this.loadingVm.$mount().$el)
+        }
     }
 }
 export default new JSLoading();

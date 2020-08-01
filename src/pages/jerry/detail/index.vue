@@ -1,15 +1,15 @@
 <template>
-  <div id="detail">
+  <div id="detail" v-if="isshow">
       <div class="imag">
         <img :src="static_data.pic" />
       </div>
       <div class="image"></div>
       <div class="top">
-        <Header title="演出详情" icon2="1">
+        <Header title="演出详情" icon2="1" flag="detail">
           <template>
             <div slot="iconfont">
               <a href="#" class="iconfont icon-fenxiang"></a>
-              <router-link class="iconfont icon-zhuye"  tag="a" to="/"></router-link>
+              <router-link class="iconfont icon-zhuye"  tag="a" to="/Home"></router-link>
             </div>
           </template>
         </Header>
@@ -93,7 +93,7 @@
               <div><img :src="share_pic" /></div>
               <p>&nbsp;</p>
               <p><strong>故事简介</strong></p>
-              <p>{{share_data}}</p>
+              <p v-html="share_data"></p>
             </div>
           </article>
           <div class="tip">
@@ -110,11 +110,10 @@
           </div>
           <div class="other">
             <h2>相关推荐</h2>
-            <dl>
+            <dl><!-- @click.native="showRouter" -->
               <router-link
                 v-for="(item,key) in show_data"
                 :key="key"
-                @click.native="showRouter"
                 tag="dd"
                 :to="'/detail/'+item.schedular_id"
               >
@@ -137,15 +136,15 @@
           />
           <span>客服</span>
         </div>
-        <input type="button" value="立即购买" />
+        <v-touch tag="button" @tap="handlePopup()">立即购买</v-touch>
       </footer>
   </div>
 </template>
 <script>
 import { detailApi } from "@api/classify.js";
-import { detailCutApi } from "@api/classify.js";
 import { detailCityApi } from "@api/classify.js";
 import { classifyApi } from "@api/classify.js";
+import {MessageBox} from "mint-ui";
 export default {
   name: "Detail",
   data() {
@@ -164,28 +163,36 @@ export default {
       show_time: "", //演出时间
       show_data: "", //推荐演出
       full_path: "", //记录哪个路由进入的
-      // timer:3000,
-      // isshow:""
-    };
+      isshow:false,
+
+      popupVisible:false
+    }
   },
   created(from) {
-      // clearTimeout(this.timer);  //清除延迟执行 
-      // this.timer = setTimeout(()=>{   //设置延迟执行
-      //     this.isshow=true;
-      // },3000)
     this.getDetailGood(this.$route.params.id);
     this.getClassifygoods();
+    var _this=this;
+    setTimeout(()=>{
+      _this.isshow=true;
+    },5000)
+  },
+  watch:{
+    "$route"(to,from){
+      this.$router.go(0);
+    },
+    "$route.params.id"(){
+      this.$router.go(0);
+    }
   },
   methods: {
     async getDetailGood(goodsId) {
       let data = await detailApi(goodsId);
-
       if (data.data.item_list.length) {
         this.show_time = data.data.item_list[0].project_time;
       }
 
       this.static_data = data.data.static_data; //获取基本数据
-      this.share_data = data.data.share_data.share_desc; //获取介绍数据
+      this.share_data = data.data.static_data.show_desc.desc; //获取介绍数据
       this.share_pic = data.data.share_data.share_pic; //获取介绍数据
       this.support = data.data.static_data.support.list; //获取支持数据
 
@@ -201,10 +208,6 @@ export default {
 
       this.getDetailCity(show_id, venue_id);
     },
-    async getDetailCut(id) {
-      //获取优惠
-      let data = await detailCutApi(id);
-    },
     async getDetailCity(show_id, venue_id) {
       //获取城市
       let data = await detailCityApi(show_id, venue_id);
@@ -217,13 +220,15 @@ export default {
         this.city_id
       );
       this.show_data = data.data.list.slice(2);
-      console.log(data);
+      this.isshow=true;
     },
-    beforeRouteEnter(){
-        this.router.go(0)
-    },
-    showRouter(){
-        this.$router.go(0)
+    handlePopup(){
+      MessageBox({
+        title: '提示',
+        message: '确定执行此操作?',
+        showCancelButton: true
+      });
+      // this.popupVisible=true;
     }
   }
 };
@@ -382,11 +387,11 @@ h2 {
   margin-bottom: 0.1rem;
   background: white;
 }
-.card a {
+#detail .card a {
   width: 2.944rem;
   height: 0.3753rem;
 }
-.card a img {
+#detail .card a img {
   height: 100%;
   height: 100%;
 }
@@ -400,29 +405,29 @@ h2 {
   color: #999;
   font-size: 0.12rem;
 }
-.two i {
+#detail .two i {
   font-style: normal;
 }
-.two .list {
+#detail .two .list {
   display: flex;
   height: 0.409rem;
   box-sizing: border-box;
   align-items: center;
 }
-.two span {
+#detail .two span {
   width: 0.4rem;
   display: block;
 }
-.two .first a {
+#detail .two .first a {
   font-weight: normal;
 }
-.quan {
+#detail .quan {
   display: flex;
   color: white;
   width: 2.371rem;
   align-items: center;
 }
-.quan i {
+#detail .quan i {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAAuCAMAAAC27sMlAAAAM1BMVEUAAAD/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0P/Z0NvQ9IYAAAAEHRSTlMABg320G4urMfr6n15G8urlF+gTgAAAK9JREFUaN7t2UsOwyAMRdFnCIR86/2vtkmlKkzC/Eo+K7gDDEiWZKVlh8itmC7H5CjTIRms+ao2Fccpao7ThJnBR5YDRfSLiI7ogYiO6IGIvsnqtjjIslfTJc2OMSf9YapnPdLqCGtSZ3eETb3qCFU9cwRTLzmC8Y8HcRCRVx7wcSE945/0KyZ+mBwool9EdEQPRHRED0T0jbm+QC6KkCs55PITuWaWrJyYacxnMekL/575apnVEBYAAAAASUVORK5CYII=)
     no-repeat;
 
@@ -432,24 +437,24 @@ h2 {
   line-height: 0.203rem;
   margin-right: 0.1rem;
 }
-.two .vip {
+#detail .two .vip {
   font-size: 0.12rem;
   color: #222;
   width: 2.371rem;
   align-items: center;
 }
-.vip .credit {
+#detail .vip .credit {
   color: #ff6743;
 }
 /*  */
-.two .cut {
+#detail .two .cut {
   display: flex;
   width: 2.371rem;
   align-items: center;
   font-size: 0.12rem;
   color: #222;
 }
-.cut1 {
+#detail .cut1 {
   transform: scale(0.8);
   color: #ff6743;
   font-size: 0.12rem;
@@ -459,7 +464,7 @@ h2 {
   border-radius: 0.04rem;
 }
 /*  */
-.two .come {
+#detail .two .come {
   font-size: 0.12rem;
   color: #222;
   white-space: nowrap;
@@ -468,7 +473,7 @@ h2 {
   text-overflow: ellipsis;
 }
 /*  */
-.two .agree {
+#detail .two .agree {
   display: flex;
 }
 #detail .agree a {
@@ -491,33 +496,36 @@ h2 {
   padding: 0.1024rem;
   background: white;
 }
-.three .head {
+#detail .three .head {
   display: flex;
   justify-content: space-between;
   padding: 0 0.05rem 0 0;
   height: 0.4692rem;
 }
 
-.three .head i {
+#detail .three .head i {
   color: #ff6743;
   font-style: normal;
 }
-.three .head a {
+#detail .three .head a {
   margin-left: 0.1rem;
 }
-.three .main {
+#detail .three .head span{
+  width: .5rem
+}
+#detail .three .main {
   height: 0.6rem;
   overflow: hidden;
 }
-.three .main ul {
+#detail .three .main ul {
   display: flex;
   justify-content: space-between;
   overflow-x: scroll;
   height: 0.8rem;
 }
-.three .main ul li {
-  height: 0.511rem;
-  width: 0.768rem;
+#detail .three .main ul li {
+  height: 0.6rem;
+width: 0.768rem;
   color: #ebebeb;
   border: 0.01rem solid #ebebeb;
   border-radius: 0.1rem;
@@ -527,45 +535,49 @@ h2 {
   align-items: center;
   box-sizing: border-box;
   justify-content: center;
-  margin: 0 0.2rem;
+  margin: 0 0.1rem;
 }
-.main li h5 {
+#detail .main li h5 {
   color: #232323;
   white-space: nowrap;
   margin: 0 0.15rem;
+  width: .5rem;
+  text-align: center;
 }
-.main li p {
+#detail .main li p {
   color: #666;
 }
 
 #detail article {
   margin-top: 0.1rem;
-  padding: 0 0.128rem;
+  padding: .1rem 0.128rem;
   background: white;
 }
 #detail article h2 {
   height: 0.3rem;
-  line-height: 0.4rem;
+  line-height: 0.3rem;
 }
 #detail.passage div {
   width: 2.944rem;
   height: 1.959rem;
 }
-.passage div img {
+#detail .passage div img {
   height: 100%;
   width: 100%;
 }
-.passage p {
+#detail .passage p {
   text-align: center;
   white-space: pre-wrap;
   font-size: 0.12rem;
   line-height: 0.2rem;
+  padding: .05rem;
 }
-.passage p strong {
+#detail .passage p img{height: 100%;width: 100%;}
+#detail .passage p strong {
   font-size: 0.18rem;
 }
 
-.tip {
+#detail .tip {
   background: white;
   height: 0.768rem;
   margin-top: 0.1rem;
@@ -573,11 +585,11 @@ h2 {
   display: flex;
   flex-direction: column;
 }
-.tip aside {
+#detail .tip aside {
   display: flex;
   justify-content: space-between;
 }
-.tip #ol {
+#detail .tip #ol {
   display: flex;
   justify-content: space-between;
   margin-top: 0.1536rem;
@@ -598,17 +610,17 @@ h2 {
   border-radius: 50%;
 }
 
-.other {
+#detail .other {
   background: white;
   margin-top: 0.1rem;
   padding: 0.1877rem 0.128rem 0.128rem;
 }
-.other dl dd {
+#detail .other dl dd {
   display: flex;
   font-weight: normal;
   margin-top: 0.2rem;
 }
-.other dl dd div {
+#detail .other dl dd div {
   height: 1.2288rem;
   width: 0.8959rem;
 }
@@ -666,12 +678,17 @@ h2 {
   flex-direction: column;
   font-size: 0.12rem;
   color: #666;
+  width: .3rem;
 }
 .tel img {
   height: 0.176rem;
   width: 0.176rem;
 }
-#detail footer input {
+.tel span{
+    display: inline;
+    text-align: center;
+}
+#detail footer button{
   border: none;
   height: 0.3413rem;
   width: 2.7448rem;
@@ -681,4 +698,30 @@ h2 {
   border-radius: 0.2rem;
   background-image: linear-gradient(50deg, #ff9a34, #ff4d4a);
 }
+.mint-msgbox-wrapper{left: .6rem;top: 3rem}
+.mint-msgbox{
+    font-size: .14rem;
+    background: black;
+    height: 1rem;
+    width: 2rem;
+    opacity: .7;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+  }
+  .mint-msgbox-header{text-align: center}
+  .mint-msgbox button{
+    background: white;
+    color: black;
+    opacity: 1;
+    margin: .1rem;
+    border: none;
+    padding: .03rem;
+    box-sizing: border-box;
+    width: .5rem;
+    font-weight: bold;
+  }
 </style>

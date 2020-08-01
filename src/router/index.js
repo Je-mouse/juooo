@@ -6,6 +6,11 @@ const router = new VueRouter({
   mode:"hash",
   routes:[
     {
+        path:"/Home",
+        component:_=>import("@pages/jerry/home"),
+        name:"Home",
+    },
+    {
         path:"/classify",
         component:_=>import("@pages/jerry/classify"),
         name:"classify",
@@ -58,8 +63,17 @@ const router = new VueRouter({
         path:"/before/:show_id",
         component:_=>import("@pages/jerry/before"),
         name:"before"
+    },
+    {
+        path:"/mine",
+        component:_=>import("@pages/jerry/mine"),
+        name:"mine"
+    },
+    {
+        path:"/stadium/:id",
+        component:_=>import("@pages/jerry/stadium"),
+        name:"stadium"
     }
   ]
 })
-
 export default router;

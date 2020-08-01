@@ -1,37 +1,29 @@
 <template>
     <div class="classify">
-        <!-- <Loading v-if="isshow==true?'':'false'"/> -->
         <div id="all">
             <Header title="演出"/>
             <Nav @handle="getCheckIndex"/>
         </div>
         <section>
              <ol>
-            <router-link v-for="(item,key) in data" :key="key" tag="li" :to="'/detail/'+item.schedular_id">
-                <a href="#"><img :src="item.pic"/></a>
-                <div id="right">
-                    <strong>{{item.show_time_top}}</strong><span>{{item.show_time_bottom}}</span>
-                    <a  href="#">
+                <router-link v-for="(item,key) in data" :key="key" tag="li" :to="'/detail/'+item.schedular_id">
+                    <a href="#"><img :src="item.pic"/></a>
+                    <div id="right">
+                        <strong>{{item.show_time_top}}</strong><span>{{item.show_time_bottom}}</span>
                         <h5>{{item.name}}</h5>
-                    </a>
-                    <p>{{item.city_name}}<i>|</i>{{item.venue_name}}</p>
-                    <b>￥{{item.min_price}}<span>起</span></b>
-                </div>
-            </router-link>
-        </ol>      
+                        <p>{{item.city_name}}<i>|</i>{{item.venue_name}}</p>
+                        <b>￥{{item.min_price}}<span>起</span></b>
+                    </div>
+                </router-link>
+            </ol>      
         </section>  
-        <router-view></router-view>
+         <keep-alive><router-view></router-view></keep-alive>
     </div>
 </template>
-
 <script>
 import {classifyApi} from "@api/classify"
-// import Loading from "@lib/loading/index.vue"
 export default {
     name:"classify",
-    // components:{
-    //     Loading
-    // },
     data(){
         return{
             id:35,
@@ -41,11 +33,6 @@ export default {
         }
     },
     created(){
-        // clearTimeout(this.timer);  //清除延迟执行 
-
-        // this.timer = setTimeout(()=>{   //设置延迟执行
-        //     this.isshow=true;
-        // },300)
         this.getGoodsList(this.id);
     },
     methods:{
@@ -57,7 +44,6 @@ export default {
         async getGoodsList(id){
               let data=await classifyApi(id);
               this.data=data.data.list;
-              console.log(this.data);
         }
     }
 }
@@ -65,24 +51,24 @@ export default {
 <style>
        #all{background: white;z-index: 999; height: .73rem;position: absolute;width: 100%}
     /* 数据渲染 */
-        .classify section{ position: absolute; left: 0;right: 0;top: 0; bottom: 0;overflow: auto;padding-top: .71rem;}
+        .classify section{background: white; position: absolute; left: 0;right: 0;top: 0; bottom: 0;overflow: auto;padding-top: .71rem;}
         .classify section ol{display: flex;padding: .07rem;flex-direction: column;}
         .classify section ol li{ list-style: none;display: flex;font-size: .14rem; color: #666; padding: 0.05rem 0;}
        
         ol li img{ width: 0.9rem;border-radius: .08rem;border: .01rem solid #ebebeb;position: relative;overflow: hidden;}
 
-        #right{ margin-left: 0.1rem; }
-        #right strong,span{font-size: .13rem;}
-        #right strong{ color: #232323;margin-right: .05rem;}
+        .classify #right{ margin-left: 0.1rem; }
+        .classify #right strong,span{font-size: .13rem;}
+        .classify #right strong{ color: #232323;margin-right: .05rem;}
         
-        #right a h5{
+        .classify #right h5{
             color: #232323;
             font-size: .14rem; 
             margin-top: .1rem;
             padding-right: .1rem;
             width: 1.9rem;
             height: .38rem;
-             text-overflow: ellipsis;
+            text-overflow: ellipsis;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -91,8 +77,8 @@ export default {
         /* #right a h6{ white-space: nowrap;width: 2rem;overflow: hidden;text-overflow: ellipsis; } */
         /* #right a h5{} */
         
-        #right p{overflow:hidden;height:.15rem;margin-top: .1rem;width: 2rem;font-size: .1rem;color: #999;height: 0.15rem;line-height: 0.15rem;margin-bottom: 0.1rem;}
-        #right p i{ font-style: normal; margin: 0 .05rem;}
-        #right b{font-weight: normal;color: #ff664383;font-size: .13rem;}
-        #right b span{color: #999; margin-left: 0.05rem;}
+        .classify #right p{overflow:hidden;height:.15rem;margin-top: .1rem;width: 2rem;font-size: .1rem;color: #999;height: 0.15rem;line-height: 0.15rem;margin-bottom: 0.1rem;}
+        .classify #right p i{ font-style: normal; margin: 0 .05rem;}
+        .classify #right b{color: #ff6643;;font-size: .13rem;}
+        .classify #right b span{color: #999; margin-left: 0.05rem;display: inline;}
 </style>

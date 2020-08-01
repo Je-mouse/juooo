@@ -6,7 +6,7 @@
                 <li v-for="(item,key) in list" :key="key">
                     <div class="head">
                         <div class="left">
-                            <img :src="item.pic"/>
+                            <router-link tag="img" :to="'/stadium/id='+item.id" :src="item.pic"/>
                             <div>
                                 <h2>{{item.name}}</h2>
                                 <span>{{item.showList.length}}场在售演出</span>
@@ -21,13 +21,14 @@
                                     <p>{{n.show_time}}</p>
                                     <span></span>
                                 </div>
-                                <a><img :src="n.pic"/></a>
+                                <router-link tag="a"  :to="'/detail/'+n.id"><img :src="n.pic"/></router-link>
                             </dd>
                         </dl>
                     </div>
                 </li>
             </ul>
         </section>
+        <TabBar/>
     </div>
 </template>
 <script>
@@ -45,14 +46,15 @@ export default {
         async getTheater(){
             let data = await theaterApi();
             this.list=data.data.theatre_list;
-            console.log(data.data.theatre_list);
-        }
+            console.log(data);
+            
+        },
     }
 }
 </script>
 <style>
-    #header{justify-content: center;position: fixed;}
-    section{
+    #theater #header{justify-content: center;position: fixed;}
+    #theater section{
         position: absolute;
         left: 0;
         top: 0;
@@ -62,7 +64,7 @@ export default {
         padding: .1rem;
         background:#fdfdfd;
     }
-    section ul li{
+    #theater section ul li{
         border: .01rem solid #ebebeb;
         border-radius: .05rem;
         display: flex;
@@ -73,42 +75,42 @@ export default {
         box-shadow: 0 0.05333rem 0.4rem 0.02667rem rgba(35,35,35,.08);
         margin-bottom: .1rem;
     }
-    ul li .head{
+    #theater ul li .head{
         display: flex;
         height:.42rem ;
         justify-content: center;
         align-items: center;
     }
-    ul li .left{
+    #theater ul li .left{
         display: flex;
         flex: 1;
         width: 2rem;
         
     }
-    ul li .left div{margin-left: .1rem;}
-    ul li .head h2{font-size: .14rem !important;color: black !important;}
-    ul li .head h2,span{
+    #theater ul li .left div{margin-left: .1rem;}
+    #theater ul li .head h2{font-size: .14rem !important;color: black !important;}
+    #theater ul li .head h2,span{
         font-size: .12rem;
         display: block;
         width: 1.5rem;
         color: #666;
     }
-    ul li img{width: .42rem;border-radius: .02rem;height: .42rem;}
+    #theater ul li img{width: .42rem;border-radius: .02rem;height: .42rem;}
 
-    .content{
+    #theater .content{
         height: 1.64rem;
         margin-top: .1rem;
         overflow: hidden;
     }
-    .content dl{
+    #theater .content dl{
             display: flex;overflow-x: scroll;
     }
-    .content dd{
+    #theater .content dd{
         height: 2rem;
         width: .9727rem;
         padding-bottom: .1rem;
     }
-    .time{
+    #theater .time{
         height: .2424rem;
         border-bottom: 1px solid #ebebeb;
         color: #b3b3b3;
@@ -117,7 +119,7 @@ export default {
         margin-bottom: .1rem;
         position: relative;
     }
-    .time span{
+    #theater .time span{
         display: inline-block;
         height:.0597rem ;
         width:.0597rem ;
@@ -127,11 +129,12 @@ export default {
         top: .22rem;
         border-radius: 50%;
     }
-    .content a{
+    #theater .content a{
         display: inline-block;
         width: .9727rem;
+        height: 1.2rem;
     }
-    .content img{
+    #theater .content img{
         width: .913rem;
         height: 1.2458rem;
     }

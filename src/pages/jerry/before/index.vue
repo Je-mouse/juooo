@@ -25,14 +25,14 @@
             </div>
         </div>
         <section>
-            <div class="list_item" v-for="(n,i) in tour_list" :key="i">
+            <router-link class="list_item" v-for="(n,i) in tour_list" :key="i" tag="div" :to="'/detail/'+n.id">
                 <p>{{time[i]}}</p>
                 <div class="date">
                     <h2>{{n.schedular_name}}</h2>
                     <h3>{{n.city_name}}<i>|</i>{{n.venue_name}}</h3>
                     <span><strong>￥{{n.low_price}}</strong>起</span>
                 </div>
-            </div>
+            </router-link>
         </section>
         <router-view></router-view>
     </div>
@@ -54,25 +54,18 @@ export default {
     methods:{
         async getBeforeList(id){
             let data = await BeforeApi(id);
-            console.log(data);
             this.list=data.data;
             let tour_list=data.data.tour_list;
+
             for(var k in tour_list){
                 this.tour_list.push(tour_list[k]);
             }
-            this.tour_list.sort((a,b)=>{
-                return b-a;
-            })
             this.getTime();
         },
         getTime(){
             for(var n in this.tour_list){
               this.time.push(new Date(parseInt(this.tour_list[n].show_time) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ')) ; 
             }
-            console.log(this.time);
-            // console.log(this.time[0]);
-            // this.fe_time=this.time[0].slice(0,10)+'-'+this.time[this.time.length-1].slice(5,10);
-            // console.log(this.fe_time)
         }
     }
 }
@@ -172,7 +165,7 @@ export default {
         flex-direction: column;
         justify-content: space-around;
     }
-   #before section .list_item .date h2{font-size: .13rem;color: black;}
+   #before section .list_item .date h2{font-size: .13rem;color: black;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
    #before section .list_item .date h3{
        font-size: .12rem;
        color: #666;

@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <!-- <keep-alive> -->
-      <router-view></router-view>
+      <router-view :key="$route.fullPath"></router-view>
     <!-- </keep-alive> -->
   </div>
 </template>
 <script>
 export default {
-  
+  name:"App"
 }
 </script>
 <style>

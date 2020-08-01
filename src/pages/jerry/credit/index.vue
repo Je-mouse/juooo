@@ -62,9 +62,7 @@ export default {
     },
     methods:{
         async getGoods(params){
-            console.log(params)
             let data= await creditApi(params);
-            console.log(data);
             this.goods=data.data.list;
         },
         handleShowCity(){

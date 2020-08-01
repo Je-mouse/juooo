@@ -2,35 +2,20 @@ const path=require("path");
 module.exports={
     devServer:{
         proxy:{
-            "/Show":{
+            "/Jerry":{
                 target:"https://api.juooo.com",
-                changeOrigin:true
+                changeOrigin:true,
+                pathRewrite:{
+                    "^/Jerry":""
+                }
             },
-            "/Scores":{
+            "/Juooo":{
                 target:"https://m.juooo.com",
-                changeOrigin:true
+                changeOrigin:true,
+                pathRewrite:{
+                    "^/Juooo":""
+                }
             },
-            "/Schedule":{
-                target:"https://api.juooo.com",
-                changeOrigin:true
-            },
-            "/Promotion":{
-                target:"https://api.juooo.com",
-                changeOrigin:true
-            },
-            "/vip":{
-                target:"https://api.juooo.com",
-                changeOrigin:true
-            },
-            "/tour":{
-                target:"https://m.juooo.com",
-                changeOrigin:true
-            },
-            "/theatre":{
-                target:"https://api.juooo.com",
-                changeOrigin:true
-            }
-            
         }
     },
     configureWebpack:{

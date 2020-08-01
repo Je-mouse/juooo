@@ -102,7 +102,7 @@ nav a{
     color: #666;
     display: inline-block;
     padding: 0 .05rem;
-    width: .4rem;
+    width: .5rem;
     border-left: .01rem solid #e6e6e6;
     text-align: center;
     line-height: .16rem;

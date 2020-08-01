@@ -28,7 +28,7 @@ export default {
         height: 20%;
         width: 6px;
         display: inline-block;
-        animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        animation: sk-stretchdelay 1.5s infinite ease-in-out;
     }
     @keyframes sk-stretchdelay {
         0%, 40%, 100% { transform: scaleY(0.4); }  

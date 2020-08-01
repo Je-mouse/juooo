@@ -1,12 +1,14 @@
 <template>
     <div id="header">
-        <v-touch tag="a" class="iconfont icon-iconfanhui"  v-if="icon1?false:true"  @tap="handleBack()"></v-touch>
+        <!-- <v-touch tag="a" class="iconfont icon-iconfanhui"  v-if="icon1?false:true"  @tap="handleBack()"></v-touch> -->
+        <router-link tag="a" class="iconfont icon-iconfanhui"  v-if="icon1?false:true" :to="flag?'/classify':'/Home'"></router-link>
             <h1>{{title}}</h1>
-        <a class="iconfont icon-icongengduo" v-if="icon2?false:true"></a>
+        <v-touch class="iconfont icon-icongengduo" v-if="icon2?false:true" tag="a" @tap="handleToast()"></v-touch>
         <slot name="iconfont"></slot>
     </div >
 </template>
 <script>
+import Toast from "../../../lib/Toast/index.js"
 export default {
    name:"Header", 
    props:{
@@ -21,13 +23,25 @@ export default {
         icon2:{
             type:String,
             default:""
+        },
+        flag:{
+            type:String,
+            default:""
         }
    },
    methods:{
-       handleBack(){
-            this.$router.back();
-        }
-   }
+       handleToast(){
+           console.log(Toast);
+            Toast({
+                message: '提示',
+                position: 'bottom',
+                duration: 5000
+           });
+       }
+   },
+//    beforeDestroy(){
+//        Toast.handleClose();
+//    }
   
 }
 </script>

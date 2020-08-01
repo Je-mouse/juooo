@@ -50,9 +50,7 @@ export default {
         async getDiscount(cate_id){
             let data= await discountApi(cate_id);
             this.count_list=data.data.list;
-            // console.log(this.count_list);
              this.flag=this.count_list.length;
-           console.log(this.flag);
            
         },
         getCheckIndex(index){
